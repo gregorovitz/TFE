@@ -14,3 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/createWord',['as'=>'createWord','uses'=>'WordTestController@createWordDocx']);
