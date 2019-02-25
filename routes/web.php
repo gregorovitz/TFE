@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/createWord',['as'=>'createWord','uses'=>'WordTestController@createWordDocx']);
 
-Route::get('events','EventsController@index')->name('events.index');
-Route::post('events','EventsController@addEvent')->name('events.add');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/roles','RoleController');

@@ -6,4 +6,4 @@
  * Time: 12:45
  */
 ?>
-@extends('adminlte::page');
+@extends('adminlte::page')

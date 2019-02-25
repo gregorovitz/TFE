@@ -168,6 +168,9 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
