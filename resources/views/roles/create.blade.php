@@ -44,7 +44,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-check">
-                <strong>@lang('site.permission') :</strong>
+                <strong>@lang('app.permission') :</strong>
                 <br/>
             <?php $colonne=2;?>
                 <table class="col-xs-12 col-sm-12 col-md-12">
@@ -59,7 +59,7 @@
                             @if($colonne<=3)
 
                                 <td style="width:30%">
-                                    {{Form::label($value->id, $value->name,array('class'=>'form-check-label col-xs-10 col-sm-10 col-md-10'))}}
+                                    {{Form::label($value->id, __($value->name),array('class'=>'form-check-label col-xs-10 col-sm-10 col-md-10'))}}
                                     {{Form::checkbox('permission[]', $value->id, false, array('class' => 'form-check-input col-xs-1 col-sm-1 col-md-1 check','id'=>$value->id)) }}
 
 

@@ -1,0 +1,9 @@
+{
+    "role-list": "show roles",
+	"role-create":"create new roles",
+	"role-edit":"edit roles",
+	"role-delete":"delete roles",
+	"user-edit" :"edit users",
+	"user-list" : "display list of all user",
+	"user-change-role":"edit role of users"
+}
