@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -64,13 +65,29 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
+     *associate this user to default role visitor
      *
      * @param  array  $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user=new User;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->firstname=$data['firstname'];
+        $user->phone=$data['phone'];
+        $user->street=$data ['street'];
+        $user->boxNum=$data['boxNum'];
+        $user->streetNum=$data ['streetNum'];
+        $user->cityId=$data['cityId'];
+        $user->assignRole('visitor');
+        $user->save();
+        return $user;
+
+        /*return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -80,6 +97,8 @@ class RegisterController extends Controller
             'boxNum'=>$data['boxNum'],
             'streetNum'=>$data ['streetNum'],
             'cityId'=>$data['cityId']
-        ]);
+        ]);*/
+
+
     }
 }
