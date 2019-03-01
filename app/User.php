@@ -28,4 +28,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function city()
+    {
+        return $this->belongsTo('App\Cities');
+    }
+    public function organisation()
+    {
+        return $this->belongsToMany('App\Organisation');
+    }
+    public function Booking()
+    {
+        return $this->belongsToMany('App\Booking');
+    }
+
 }

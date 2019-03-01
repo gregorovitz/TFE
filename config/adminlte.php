@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'appCentrePlacet',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' =>'<img src="img/centreplacet.PNG" width="25px" height="25px"/> Centre <b>Placet</b>',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' =>'<img src="img/centreplacet.PNG" width="25px" height="25px"/>',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'white',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,22 +110,30 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'users',
+            'url'  => 'user',
+            'can'  => 'user-list',
+            'icon'=>'user'
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'roles',
+            'url'         => 'roles',
+            'icon'        => 'cog',
+            'can'         =>'role-list',
+
+        ],
+        [
+            'text'=>'location grande salle',
+            'url'=>'locationGS',
+            'icon'=>'calendar',
         ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
             'url'  => 'admin/settings',
             'icon' => 'user',
+            'label'       => 4,
+            'label_color' => 'success',
         ],
         [
             'text' => 'Change Password',
