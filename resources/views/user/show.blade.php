@@ -16,7 +16,8 @@
         <div class="col-lg-12 margin-tb">
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('user.index') }}"> @lang('app.back')</a>
+                <a class="btn btn-primary" href="{{URL::previous()}}"> @lang('app.back')</a>
+
             </div>
         </div>
     </div>
@@ -43,6 +44,30 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>@lang('app.adress') :</strong>
+                {{ $user->street }} {{ $user->streetNum }} @if(isset ($user->BoxNum))bt {{ $user->BoxNum }} @endif - {{ $user->city->name}}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>@lang('app.phone') :</strong>
+                {{ $user->phone }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>@lang('app.organisation') :</strong>
+                @if ($user->organisation()->count()>0)
+                    @foreach($user->organisation as $v)
+                        <label >{{ $v->name }}</label>,
+                    @endforeach
+                @endif
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>@lang('app.roles'):</strong>
                 @if(!empty($user->getRoleNames()))
                     @foreach($user->getRoleNames() as $v)
@@ -51,5 +76,11 @@
                 @endif
             </div>
         </div>
+        @if(auth()->user()->id==$user->id)
+            <a href="{{ route('user.edit',[$user->id]) }}"class="btn btn-squared btn-outline-primary">
+                <i class="icmn-pencil" aria-hidden="true"></i>
+                @lang('app.edit')
+            </a>
+        @endif
     </div>
 @endsection

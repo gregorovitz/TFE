@@ -124,7 +124,7 @@ return [
         ],
         [
             'text'=>'location grande salle',
-            'url'=>'locationGS',
+            'url'=>'location',
             'icon'=>'calendar',
         ],
         'ACCOUNT SETTINGS',

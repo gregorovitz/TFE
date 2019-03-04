@@ -18,11 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('firstname');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('street');
-            $table->string('streetNum');
+            $table->string('phone')->default ('none');
+            $table->string('street')->default ('none');
+            $table->string('streetNum')->default ('none');
             $table->string('boxNum')->nullable();
-            $table->unsignedInteger('cityId');
+            $table->unsignedInteger('cityId')->default ('1414');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

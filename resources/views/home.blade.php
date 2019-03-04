@@ -7,5 +7,9 @@
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    @if ((Auth::user()->phone='none' )|| (Auth::user()->street='none')|| (Auth::user()->street_num='none'))
+        @lang('app.uncompletProfiel')
+    @else
+        @lang('app.welkom')
+    @endif
 @stop

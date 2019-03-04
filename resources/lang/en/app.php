@@ -16,5 +16,8 @@ return[
     'back'=>'back',
     'save'=>'save',
     'permission'=>'permission',
+    'firstname'=>'firstname',
+    'email'=>'email',
+    'user'=>'user',
 
 ];

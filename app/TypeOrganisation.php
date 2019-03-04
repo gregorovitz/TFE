@@ -11,6 +11,6 @@ class TypeOrganisation extends Model
     ];
     public function organisation()
     {
-        return $this->belongsToMany('App\Organisation');
+        return $this->belongsToMany('App\Organisation','organisation_has_type','typeOrganisationId','organisationId');
     }
 }

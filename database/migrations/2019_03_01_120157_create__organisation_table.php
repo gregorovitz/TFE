@@ -14,12 +14,12 @@ class CreateOrganisationTable extends Migration
     public function up()
 
     {
-        Schema::create('Organisation', function (Blueprint $table) {
+        Schema::create('Organisations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
-        Schema::create('TypeOrganisation', function (Blueprint $table) {
+        Schema::create('TypeOrganisations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -29,10 +29,10 @@ class CreateOrganisationTable extends Migration
             $table->unsignedInteger('typeOrganisationId');
             $table->foreign('organisationId')
                 ->references('id')
-                ->on('Organisation');
+                ->on('Organisations');
             $table->foreign('typeOrganisationId')
                 ->references('id')
-                ->on('TypeOrganisation');
+                ->on('TypeOrganisations');
             $table->primary(['organisationId','typeOrganisationId']);
         });
         Schema::create('Organisation_has_user', function (Blueprint $table) {
@@ -40,7 +40,7 @@ class CreateOrganisationTable extends Migration
             $table->unsignedInteger('userId');
             $table->foreign('organisationId')
                 ->references('id')
-                ->on('Organisation');
+                ->on('Organisations');
             $table->foreign('userId')
                 ->references('id')
                 ->on('users');
@@ -57,7 +57,7 @@ class CreateOrganisationTable extends Migration
     {
         Schema::dropIfExists('organisation_has_user');
         Schema::dropIfExists('organisation_has_type');
-        Schema::dropIfExists('organisation');
-        Schema::dropIfExists('typeorganisation');
+        Schema::dropIfExists('organisations');
+        Schema::dropIfExists('typeorganisations');
     }
 }

@@ -53,11 +53,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'firstname' =>['required','string','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' =>['required','phone:BE'],
-            'street'=>['required','string','max:255'],
-            'streetNum'=>['required','string'],
-            'boxNum'=>['sometimes','nullable','string'],
-            'cityId'=>['required','integer'],
             'password' => ['required', 'string', 'between:8,20', 'confirmed'],
 
         ]);
@@ -78,26 +73,10 @@ class RegisterController extends Controller
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
         $user->firstname=$data['firstname'];
-        $user->phone=$data['phone'];
-        $user->street=$data ['street'];
-        $user->boxNum=$data['boxNum'];
-        $user->streetNum=$data ['streetNum'];
-        $user->cityId=$data['cityId'];
         $user->assignRole('visitor');
         $user->save();
         return $user;
 
-        /*return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'firstname'=>$data['firstname'],
-            'phone'=>$data['phone'],
-            'street'=>$data ['street'],
-            'boxNum'=>$data['boxNum'],
-            'streetNum'=>$data ['streetNum'],
-            'cityId'=>$data['cityId']
-        ]);*/
 
 
     }

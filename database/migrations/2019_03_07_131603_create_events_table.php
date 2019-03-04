@@ -13,10 +13,14 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
+        Schema::create('TypeEvents',function (Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
         Schema::create('Events', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('events_name');
             $table->integer('numPeopleExp');
             $table->Json('numPeopleActuCame')->nullable();
             $table->string('name');
@@ -25,25 +29,28 @@ class CreateEventsTable extends Migration
             $table->string('daysofweek')->nullable();
             $table->time('startime');
             $table->time('endtime');
+            $table->unsignedInteger('roomId');
+            $table->unsignedInteger('typeEventsId');
+            $table->unsignedInteger('userId');
+            $table->unsignedInteger('bookingId');
             $table->string('color')->default('orange');
-        });
-        Schema::create('TypeEvents',function (Blueprint $table){
-           $table->increments('id');
-           $table->string('name');
-           $table->timestamps();
-        });
-        Schema::create('Events_has_Types',function (Blueprint $table){
-            $table->unsignedInteger('EventsId');
-            $table->unsignedInteger('TypeEventsId');
+            $table->foreign('roomId')
+                ->references('id')
+                ->on ('rooms');
+            $table->foreign('typeEventsId')
+                ->references('id')
+                ->on('typeevents');
+            $table->foreign('userId')
+                ->references('id')
+                ->on ('users');
+            $table->foreign('bookingId')
+                ->references('id')
+                ->on ('bookings');
 
-            $table->foreign('EventsId')
-                ->references('id')
-                ->on('Events');
-            $table->foreign('TypeEventsId')
-                ->references('id')
-                ->on('TypeEvents');
-            $table->primary(['EventsId','TypeEventsId']);
         });
+
+
+
 
     }
 
@@ -54,8 +61,7 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events_has_types');
-        Schema::dropIfExists('typeevents');
         Schema::dropIfExists('events');
+        Schema::dropIfExists('typeevents');
     }
 }

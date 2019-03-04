@@ -30,15 +30,19 @@ class User extends Authenticatable
     ];
     public function city()
     {
-        return $this->belongsTo('App\Cities');
+        return $this->belongsTo('App\Cities','cityId','cityId');
     }
     public function organisation()
     {
-        return $this->belongsToMany('App\Organisation');
+        return $this->belongsToMany('App\Organisation','organisation_has_user','userId','organisationId');
     }
     public function Booking()
     {
-        return $this->belongsToMany('App\Booking');
+        return $this->hasMany('App\Booking');
+    }
+    public function event()
+    {
+        return $this->hasMany('App\Events');
     }
 
 }

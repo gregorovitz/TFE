@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cities;
+use App\Organisation;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +28,9 @@ class UserController extends Controller
         $settings=User::all();
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-        return view('user.edit',compact('user','roles','userRole'));
+        $cities=Cities::pluck('name','cityId');
+        $organisation=Organisation::pluck('name','id');
+        return view('user.edit',compact('user','roles','userRole','cities','organisation'));
     }
     public function show($id)
     {
@@ -47,7 +50,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
 
     {
-
 
         $input = $request->all();
 
@@ -86,7 +88,36 @@ class UserController extends Controller
         } else {
             $function = $input['function'];
         }
-
+        if (!isset($input['street'])) {
+            $street = $user->street;
+        } else {
+            $street = $input['street'];
+        }
+        $user->street = $street;
+        if (!isset($input['streetNum'])) {
+            $streetNum = $user->streetNum;
+        } else {
+            $streetNum = $input['streetNum'];
+        }
+        $user->streetNum = $streetNum;
+        if (!isset($input['boxNum'])) {
+            $boxNum = $user->boxNum;
+        } else {
+            $boxNum = $input['boxNum'];
+        }
+        $user->boxNum = $boxNum;
+        if (!isset($input['cityId'])) {
+            $cityId = $user->cityId;
+        } else {
+            $cityId = $input['cityId'];
+        }
+        $user->cityId = $cityId;
+        if (!isset($input['phone'])) {
+            $phone= $user->phone;
+        } else {
+            $phone = $input['phone'];
+        }
+        $user->phone = $phone;
 
         if(isset($newpassword)) {
             $password=$newpassword;

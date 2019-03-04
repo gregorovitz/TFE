@@ -7,14 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Events extends Model
 {
     protected $fillable=[
-        'event_name','start_date','end_date','numPeopleExp','numPeopleActuCame','daysofweek','startime','endtime','color'
+       'userId','typeEventsId','roomId','bookingId','event_name','start_date','end_date','numPeopleExp','numPeopleActuCame','daysofweek','startime','endtime','color'
     ];
     public function booking()
     {
-        return $this->belongsToMany('App\Booking');
+        return $this->belongsTo('App\Booking','bookingId');
     }
     public function room()
     {
-        return $this->belongsToMany('App\Room');
+        return $this->belongsTo('App\Room','roomId');
     }
+    public function type()
+    {
+        return $this ->belongsTo('App\TypeEvents','typeEventsId');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User','userId');
+    }
+
 }

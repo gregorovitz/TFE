@@ -9,8 +9,9 @@ class TypeEvents extends Model
     protected $fillable = [
         'name'
     ];
+    protected $table='typeevents';
     public function event()
     {
-        return $this->belongsToMany('App\Events');
+        return $this->hasMany('App\Events');
     }
 }

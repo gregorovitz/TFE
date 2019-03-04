@@ -40,7 +40,7 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('street') ? 'has-error' : '' }}">
-                <input type="text" name="street" class="form-control" value="{{$user->street }}"
+                <input type="text" name="street" class="form-control" @if($user->street!="none")value="{{$user->street }} " @endif
                        placeholder="{{ trans('adminlte::adminlte.street') }}">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 @if ($errors->has('street'))
@@ -50,7 +50,7 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('streetNum') ? 'has-error' : '' }}">
-                <input type="text" name="streetNum" class="form-control" value="{{$user->streetNum }}"
+                <input type="text" name="streetNum" class="form-control"@if($user->streetNum!="none") value="{{$user->streetNum }}" @endif
                        placeholder="{{ trans('adminlte::adminlte.streetNum') }}">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 @if ($errors->has('streetNum'))
@@ -70,7 +70,7 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('phone') ? 'has-error' : '' }}">
-                <input type="text" name="phone" class="form-control" value="{{ $user->phone }}"
+                <input type="text" name="phone" class="form-control" @if($user->phone!="none") value="{{ $user->phone }}" @endif
                        placeholder="{{ trans('adminlte::adminlte.phone') }}">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 @if ($errors->has('phone'))
@@ -80,14 +80,23 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('cityId') ? 'has-error' : '' }}">
-                <input type="text" name="cityId" class="form-control" value="{{ $user->cityId }}"
-                       placeholder="{{ trans('adminlte::adminlte.cityId') }}">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                {!! Form::select('cityId',$cities, $user->city->name,['class'=>"form-control"] ) !!}
+                {{--<input type="text" name="cityId" class="form-control" value="{{ $user->cityId }}"--}}
+                       {{--placeholder="{{ trans('adminlte::adminlte.cityId') }}">--}}
+                {{--<span class="glyphicon glyphicon-envelope form-control-feedback"></span>--}}
                 @if ($errors->has('cityId'))
                     <span class="help-block">
                             <strong>{{ $errors->first('cityId') }}</strong>
                         </span>
                 @endif
+            </div>
+            <div class="form-group has-feedback {{ $errors->has('organisationId') ? 'has-error' : '' }}">
+            {!! Form::select('organisationId',$organisation, null,['class'=>"form-control"] ) !!}
+            @if ($errors->has('organisationId'))
+                <span class="help-block">
+                            <strong>{{ $errors->first('organisationId') }}</strong>
+                </span>
+            @endif
             </div>
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
@@ -125,7 +134,7 @@
             @endif
 
         @endif
-        {{--@if(auth()->user()->can('user-change-role'))--}}
+        @if(auth()->user()->can('user-change-role'))
             <div class="form-group row">
                 <label for="function" class="col-sm-2 col-form-label ">@lang('app.roles')</label>
                 <div class="col-md-10">
@@ -137,7 +146,7 @@
                     @endif
                 </div>
             </div>
-        {{--@endif--}}
+        @endif
             @component('component.button')
                 @lang('app.save')
             @endcomponent
