@@ -49,9 +49,6 @@ class CreateEventsTable extends Migration
 
         });
 
-
-
-
     }
 
     /**

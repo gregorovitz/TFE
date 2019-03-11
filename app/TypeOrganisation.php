@@ -9,8 +9,9 @@ class TypeOrganisation extends Model
     protected $fillable = [
         'name'
     ];
+    protected $table='typeorganisations';
     public function organisation()
     {
-        return $this->belongsToMany('App\Organisation','organisation_has_type','typeOrganisationId','organisationId');
+        return $this->hasMany('App\Organisation');
     }
 }

@@ -57,11 +57,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>@lang('app.organisation') :</strong>
-                @if ($user->organisation()->count()>0)
-                    @foreach($user->organisation as $v)
-                        <label >{{ $v->name }}</label>,
-                    @endforeach
-                @endif
+                {{$user->organisation->name}}
+                {{--@if ($user->organisation()->count()>0)--}}
+                    {{--@foreach($user->organisation as $v)--}}
+                        {{--<label >{{ $v->name }}</label>,--}}
+                    {{--@endforeach--}}
+                {{--@endif--}}
 
             </div>
         </div>

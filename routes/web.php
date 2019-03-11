@@ -22,3 +22,4 @@ Route::resource('/roles','RoleController');
 Route::resource('/user','UserController');
 route::resource('/location','LocationGSController');
 Route::post('/location','LocationGSController@addEvent')->name('location.add');
+Route::resource('/print','ContractPrintLocation');

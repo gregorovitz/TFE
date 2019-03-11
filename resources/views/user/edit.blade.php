@@ -80,10 +80,7 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('cityId') ? 'has-error' : '' }}">
-                {!! Form::select('cityId',$cities, $user->city->name,['class'=>"form-control"] ) !!}
-                {{--<input type="text" name="cityId" class="form-control" value="{{ $user->cityId }}"--}}
-                       {{--placeholder="{{ trans('adminlte::adminlte.cityId') }}">--}}
-                {{--<span class="glyphicon glyphicon-envelope form-control-feedback"></span>--}}
+                {!! Form::select('cityId',$cities, $user->city->cityId,['class'=>"form-control"] ) !!}
                 @if ($errors->has('cityId'))
                     <span class="help-block">
                             <strong>{{ $errors->first('cityId') }}</strong>
@@ -91,7 +88,7 @@
                 @endif
             </div>
             <div class="form-group has-feedback {{ $errors->has('organisationId') ? 'has-error' : '' }}">
-            {!! Form::select('organisationId',$organisation, null,['class'=>"form-control"] ) !!}
+            {!! Form::select('organisationId',$organisation, $user->organisation->id,['class'=>"form-control"] ) !!}
             @if ($errors->has('organisationId'))
                 <span class="help-block">
                             <strong>{{ $errors->first('organisationId') }}</strong>

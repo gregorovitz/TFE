@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' =>'<img src="img/centreplacet.PNG" width="25px" height="25px"/> Centre <b>Placet</b>',
+    'logo' =>'<img src="/img/PlacetLogoDef.png" width="140px" height="45px"/> ',
 
-    'logo_mini' =>'<img src="img/centreplacet.PNG" width="25px" height="25px"/>',
+    'logo_mini' =>'<img src="/img/PlacetLogoDef-VERTI.png" width="40px" height="40px"/>',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'white',
+    'skin' => 'blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -127,70 +127,81 @@ return [
             'url'=>'location',
             'icon'=>'calendar',
         ],
-        'ACCOUNT SETTINGS',
         [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'=>'location interne',
+            'url'=>'location',
+            'icon'=>'calendar',
+            'can'=>'display-intern-calendar'
         ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
-            'submenu' => [
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
-        ],
+//        'ACCOUNT SETTINGS',
+//        'can'=>'disabled',
+//        [
+//            'can'=>'disabled',
+//            'text' => 'Profile',
+//            'url'  => 'admin/settings',
+//            'icon' => 'user',
+//            'label'       => 4,
+//            'label_color' => 'success',
+//        ],
+//        [
+//            'text' => 'Change Password',
+//            'url'  => 'admin/settings',
+//            'icon' => 'lock',
+//            'can'=>'disabled',
+//        ],
+//        [
+//            'can'=>'disabled',
+//            'text'    => 'Multilevel',
+//            'icon'    => 'share',
+//            'submenu' => [
+//                [
+//                    'text' => 'Level One',
+//                    'url'  => '#',
+//                ],
+//                [
+//                    'text'    => 'Level One',
+//                    'url'     => '#',
+//                    'submenu' => [
+//                        [
+//                            'text' => 'Level Two',
+//                            'url'  => '#',
+//                        ],
+//                        [
+//                            'text'    => 'Level Two',
+//                            'url'     => '#',
+//                            'submenu' => [
+//                                [
+//                                    'text' => 'Level Three',
+//                                    'url'  => '#',
+//                                ],
+//                                [
+//                                    'text' => 'Level Three',
+//                                    'url'  => '#',
+//                                ],
+//                            ],
+//                        ],
+//                    ],
+//                ],
+//                [
+//                    'text' => 'Level One',
+//                    'url'  => '#',
+//                ],
+//            ],
+//        ],
+//        'can'=>'disabled',
+//        'LABELS',
+//        [
+//            'text'       => 'Important',
+//            'icon_color' => 'red',
+//        ],
+//        [
+//            'text'       => 'Warning',
+//            'icon_color' => 'yellow',
+//        ],
+//        [
+//            'text'       => 'Information',
+//            'icon_color' => 'aqua',
+//        ],
     ],
 
     /*

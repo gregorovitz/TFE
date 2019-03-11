@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cities;
+use App\Http\Requests\updateUserRequest;
 use App\Organisation;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -32,6 +34,13 @@ class UserController extends Controller
         $organisation=Organisation::pluck('name','id');
         return view('user.edit',compact('user','roles','userRole','cities','organisation'));
     }
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+
     public function show($id)
     {
         $user = User::find($id);
@@ -47,7 +56,7 @@ class UserController extends Controller
     public function getHome(){
         return view('/');
     }
-    public function update(Request $request, $id)
+    public function update(updateUserRequest $request, $id)
 
     {
 
@@ -72,7 +81,7 @@ class UserController extends Controller
         }
         $user->name = $name;
         if (!isset($input['firstname'])) {
-            $firstname = $user->name;
+            $firstname = $user->firstname;
         } else {
             $firstname = $input['firstname'];
         }
@@ -84,7 +93,7 @@ class UserController extends Controller
         }
         $user->email = $email;
         if (!isset($input['function'])) {
-            $function = $user->function;
+
         } else {
             $function = $input['function'];
         }
@@ -126,10 +135,18 @@ class UserController extends Controller
         else {
             $password=$user->password;
         }
+
+        $user->organisationId=$input['organisationId'];
         $user->password=$password;
+        $user->updated_at=now();
         $user->save();
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-        $user->assignRole($function);
+
+
+      if (isset($function)) {
+
+          DB::table('model_has_roles')->where('model_id', $id)->delete();
+          $user->assignRole($function);
+      }
 
         return redirect()->route('home')
             ->with('success', __('messages.user.update'));

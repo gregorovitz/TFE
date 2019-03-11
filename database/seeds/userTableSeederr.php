@@ -26,6 +26,7 @@ class userTableSeederr extends Seeder
         $user->phone='0476983038';
         $user->cityId=482;
 
+
         $user->save();
         $user=new User;
         $user->name = 'Marquebreucq';

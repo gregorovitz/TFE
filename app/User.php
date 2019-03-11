@@ -34,7 +34,7 @@ class User extends Authenticatable
     }
     public function organisation()
     {
-        return $this->belongsToMany('App\Organisation','organisation_has_user','userId','organisationId');
+        return $this->belongsTo('App\Organisation','organisationId','id');
     }
     public function Booking()
     {

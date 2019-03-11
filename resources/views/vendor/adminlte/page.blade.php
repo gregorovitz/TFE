@@ -107,7 +107,9 @@
                                                 </li>
                                             @endauth
                                         </ul>
-                </div>
+
+                                    </div>
+                                </nav>
                 @if(config('adminlte.layout') == 'top-nav')
                 </div>
                 @endif

@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    @if ((Auth::user()->phone='none' )|| (Auth::user()->street='none')|| (Auth::user()->street_num='none'))
+    @if ((Auth::user()->phone=='none' )|| (Auth::user()->street=='none')|| (Auth::user()->streetNum=='none')||(Auth::user()->organisationId ==1))
         @lang('app.uncompletProfiel')
     @else
         @lang('app.welkom')

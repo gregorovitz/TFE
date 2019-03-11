@@ -11,10 +11,10 @@ class Organisation extends Model
     ];
     public function user()
     {
-        return $this->belongsToMany('App\User','organisation_has_user','organisationId','userId');
+        return $this->hasMany('App\User');
     }
     public function type()
     {
-        return $this->belongsToMany('App\TypeOrganisation','organisation_has_type','organisationId','typeOrganisationId');
+        return $this->belongsTo('App\TypeOrganisation');
     }
 }

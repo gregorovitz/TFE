@@ -20,6 +20,8 @@ class LocationGSController extends Controller
         if ($events->count()){
             foreach ($events as $key =>$event){
 //                print_r($event) ;
+
+                $nameOrg=$event->user->organisation->name;
                 $events_List[]=Calendar::event(
 
                     $event->name,
@@ -29,8 +31,18 @@ class LocationGSController extends Controller
                     null,
                     // Add color and link on event
                     [
-
+                        'name'=>$event->user->name,
+                        'firstname'=>$event->user->firstname,
+                        'organisation'=>$nameOrg,
+                        'address'=>$event->user->street.' '.$event->user->streetNum,
+                        'zip'=>$event->user->city->zipCode,
+                        'city'=>$event->user->city->name,
                         'color' => $event->color,
+                        'phone'=>$event->user->phone,
+                        'type'=>$event->type->name,
+                        'mail'=>$event->user->email,
+                        'exp'=>$event->numPeopleExp,
+
 //                        'url' => '/event/{'.$event->id.'}' ,
                     ]
                 );
@@ -38,9 +50,14 @@ class LocationGSController extends Controller
         }
 
         $calendar_details=Calendar::addEvents($events_List)->setOptions([
-            'defaultView'=>'month',
+            'defaultView'=>'agendaWeek',
             'selectable'=>'true',
-            'businessHours'=>'true',
+            "businessHours: {
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            dow: [0, 1, 2, 3, 4, 5, 6], // Monday - Thursday
+            start: '09:00', // a start time (10am in this example)
+            end: '00:00', // an end time (6pm in this example)
+                            }",
             'allDay'=>'false',
             'locale'=>'fr'
 
@@ -53,20 +70,34 @@ class LocationGSController extends Controller
             $('#end').val(date1);
             return false
                 }",
-            'eventClick'=>" function(calEvent, jsEvent, view) {
-                alert('date début: ' + calEvent.start.format('DD-MM-YYYY HH:MM:SS')+ '\\ndate de fin: '+ calEvent.end.format('DD-MM-YYYY HH:MM:SS')+'\\nnom : '+ calEvent.title);
-                // change the border color just for fun
-                 $(this).css('border-color', 'red');
-            }"
-//            'eventClick'=>"function (calEvent){
-//            $('#myModalEvent').modal();
-//        var date_start=calEvent.start;
-//        var date_end=calEvent.end;
-//        $('#title').val(calEvent.title);
-//        $('#start_event').val(date_start);
-//        $('#end_event').val(date_end);
-//        return false;
-//                }"
+//            'eventClick'=>" function(calEvent) {
+//                $('#Modalview).modal();
+//                $('#title').val(calEvent.title);
+//                $('#start_event').val(calEvent.start.format('DD-MM-YYYY HH:MM:SS'));
+//                $('#end_event').val( calEvent.end.format('DD-MM-YYYY HH:MM:SS'));
+////                alertnombre de personne attendue: '+calEvent.exp );
+//                // change the border color just for fun
+//                 $(this).css('border-color', 'red');
+//            }"
+            'eventClick'=>"function (calEvent){
+            $('#Modalview').modal();
+            alert(calEvent.start.format('DD-MM-YYYY HH:MM:SS'));
+            alert(calEvent.end.format('DD-MM-YYYY HH:MM:SS'));
+            $('#title').text(calEvent.title);
+            $('#name').text(calEvent.name);
+            $('#firstname').text(calEvent.firstname);
+            $('#organisation').text(calEvent.organisation);
+            $('#address').text(calEvent.address);
+            $('#zip').text(calEvent.zip);
+            $('#city').text(calEvent.city);
+            $('#phone').text(calEvent.phone);
+            $('#mail').text(calEvent.mail);
+            $('#start_date').html(calEvent.start.format('DD-MM-YYYY HH:MM:SS'));
+            $('#end_date').html(calEvent.end.format('DD-MM-YYYY HH:MM:SS'));
+            $('#type').text(calEvent.type);
+            $('#peopleExp').text(calEvent.exp);
+            return false;
+                }"
         ]);
 
         return view('calendar.calendar',compact('calendar_details','typesEvents'));
