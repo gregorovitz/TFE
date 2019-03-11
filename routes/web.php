@@ -18,7 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('/roles','RoleController');
+Route::resource('/permissions','PermissionController');
 Route::resource('/user','UserController');
 route::resource('/location','LocationGSController');
 Route::post('/location','LocationGSController@addEvent')->name('location.add');

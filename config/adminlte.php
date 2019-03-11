@@ -123,17 +123,37 @@ return [
 
         ],
         [
-            'text'=>'location grande salle',
-            'url'=>'location',
-            'icon'=>'calendar',
+            'text'        => 'permissions',
+            'url'         => 'permissions',
+            'icon'        => 'cog',
+            'can'         =>'permission-list'
+
         ],
         [
-            'text'=>'location interne',
-            'url'=>'location',
-            'icon'=>'calendar',
-            'can'=>'display-intern-calendar'
-        ],
-//        'ACCOUNT SETTINGS',
+            'text'    => 'location',
+            'icon'    => 'share',
+            'submenu' => [
+
+                [
+                    'text'=>'grande salle',
+                    'url'=>'location/2',
+                    'icon'=>'calendar',
+                ],
+                [
+                    'text'=>'salle 2',
+                    'url'=>'location/3',
+                    'icon'=>'calendar',
+                ],
+                [
+                    'text'=>'interne',
+                    'url'=>'#',
+                    'icon'=>'calendar',
+                    'can'=>'display-intern-calendar'
+                 ],
+            ]
+        ]
+
+                //        'ACCOUNT SETTINGS',
 //        'can'=>'disabled',
 //        [
 //            'can'=>'disabled',

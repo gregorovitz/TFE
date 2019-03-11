@@ -12,10 +12,18 @@ use Illuminate\Support\Facades\Validator;
 use App\Events;
 class LocationGSController extends Controller
 {
-    public function index(){
+    public function show($room){
         $typesEvents=TypeEvents::pluck('name','id');
 
-        $events=Events::get();
+        if($room==1 ) {
+
+                $room = 2;
+                $events = Events::where('roomId', $room)->get();
+                echo('salut');
+
+        }else{
+            $events=Events::where('roomId',$room)->get();
+        }
         $events_List=[];
         if ($events->count()){
             foreach ($events as $key =>$event){

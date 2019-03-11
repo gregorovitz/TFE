@@ -19,7 +19,15 @@
 
 @endsection
 @section('content')
-
+   {{-- <div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">grande Salle</button>
+            <button type="button" class="btn btn-secondary">salle 2</button>
+            @can('display-intern-calendar')
+            <button type="button" class="btn btn-secondary">callendrier interne</button>
+            @endcan
+        </div>
+    </div>--}}
     <div class ="panel panel-primary">
         <div class="panel-heading">My Event Details</div>
         <div class="panel-body">
@@ -45,7 +53,7 @@
                             <div class="alert alert-danger">{{Session::get('warning')}}</div>
                         @endif
                     </div>
-                    {{Form::hidden('roomsId',1)}}
+                    {{Form::hidden('roomsId',3)}}
                         {!! $errors->first('roomsId','<p class="alert alert-danger">:message</p>') !!}
 
                     {{--<div class="col-xs-4 col-sm-4 col-md-4">--}}

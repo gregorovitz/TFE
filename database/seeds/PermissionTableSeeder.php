@@ -20,7 +20,12 @@ class PermissionTableSeeder extends Seeder
             'role-delete',
             'user-edit',
             'user-list',
-            'user-change-role'
+            'user-change-role',
+            'permission-list',
+            'permission-create',
+            'permission-edit',
+            'display-intern-calendar'
+
         ];
 
 
