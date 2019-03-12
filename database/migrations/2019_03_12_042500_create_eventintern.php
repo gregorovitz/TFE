@@ -21,6 +21,10 @@ class CreateEventIntern extends Migration
             $table->string('participant');
             $table->integer('budget');
             $table->unsignedInteger('secteurId');
+            $table->unsignedInteger('eventId');
+            $table->foreign('eventId')
+                ->references('id')
+                ->on ('events');
             $table->foreign('secteurId')
                 ->references('id')
                 ->on('secteur');
@@ -35,6 +39,6 @@ class CreateEventIntern extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_event_intern');
+        Schema::dropIfExists('eventintern');
     }
 }

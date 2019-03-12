@@ -29,7 +29,11 @@ class LocationGSController extends Controller
         if ($events->count()){
             foreach ($events as $key =>$event){
 //                print_r($event) ;
-
+                if ($event->interneId==null){
+                    $color=$event->color;
+                }else{
+                    $color='red';
+                }
                 $nameOrg=$event->user->organisation->name;
                 $events_List[]=Calendar::event(
 
@@ -39,14 +43,16 @@ class LocationGSController extends Controller
                     new \DateTime($event->end_date.$event->endtime),
                     null,
                     // Add color and link on event
+
                     [
+
                         'name'=>$event->user->name,
                         'firstname'=>$event->user->firstname,
                         'organisation'=>$nameOrg,
                         'address'=>$event->user->street.' '.$event->user->streetNum,
                         'zip'=>$event->user->city->zipCode,
                         'city'=>$event->user->city->name,
-                        'color' => $event->color,
+                        'color' => $color,
                         'phone'=>$event->user->phone,
                         'type'=>$event->type->name,
                         'mail'=>$event->user->email,
