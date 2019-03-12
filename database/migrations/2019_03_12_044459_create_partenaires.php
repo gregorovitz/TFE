@@ -13,7 +13,7 @@ class CreatePartenaires extends Migration
      */
     public function up()
     {
-        Schema::create('_partenaires', function (Blueprint $table) {
+        Schema::create('partenaires', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePartenaires extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_partenaires');
+        Schema::dropIfExists('partenaires');
     }
 }

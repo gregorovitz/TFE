@@ -17,7 +17,7 @@ class contractPrintLocation extends Controller
         //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('Template.docx'));
         $name = new TextRun();
-        $name->addText($event->name.' '.$event->firstname, array('bold' => true,  'color' => 'black'));
+        $name->addText($event->user->name.' '.$event->user->firstname, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('name', $name);
         $organisation = new TextRun();
         $organisation->addText($event->user->organisation->name, array('bold' => true,  'color' => 'black'));
@@ -57,7 +57,8 @@ class contractPrintLocation extends Controller
 
         echo date('H:i:s'), ' Saving the result document...';
         $templateProcessor->saveAs(storage_path('testtemplate.docx'));
-        /*echo getEndingNotes(array('Word2007' => 'docx'));*/
+//        $templateProcessor->saveAs("helloWorld.docx");
+        return Response()->download(storage_path('testtemplate.docx'));
 
     }
 

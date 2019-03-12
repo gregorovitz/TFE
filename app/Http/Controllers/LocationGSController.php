@@ -51,6 +51,7 @@ class LocationGSController extends Controller
                         'type'=>$event->type->name,
                         'mail'=>$event->user->email,
                         'exp'=>$event->numPeopleExp,
+                        'id'=>$event->id
 
 //                        'url' => '/event/{'.$event->id.'}' ,
                     ]
@@ -90,8 +91,6 @@ class LocationGSController extends Controller
 //            }"
             'eventClick'=>"function (calEvent){
             $('#Modalview').modal();
-            alert(calEvent.start.format('DD-MM-YYYY HH:MM:SS'));
-            alert(calEvent.end.format('DD-MM-YYYY HH:MM:SS'));
             $('#title').text(calEvent.title);
             $('#name').text(calEvent.name);
             $('#firstname').text(calEvent.firstname);
@@ -105,6 +104,7 @@ class LocationGSController extends Controller
             $('#end_date').html(calEvent.end.format('DD-MM-YYYY HH:MM:SS'));
             $('#type').text(calEvent.type);
             $('#peopleExp').text(calEvent.exp);
+            $('#print').attr('href','/print/'+calEvent.id)
             return false;
                 }"
         ]);
@@ -116,8 +116,8 @@ class LocationGSController extends Controller
         $validator= Validator::make($request->all(),[
             'event_name'=>'required',
             'start_date'=>'required|date|after:today',
-            'start_time'=>'required',
-            'end_time'=>'required',
+            'start_time'=>'required|date_format:H:i|after_or_equal:09:00|before_or_equal:24:00',
+            'end_time'=>'required|date_format:H:i|before_or_equal:24:00|after_or_equal:09:00',
             'end_date'=>'required|date|after_or_equal:start_date',
             'typeEventsId'=>'required|integer|exists:typeevents,id',
             'numPeopleexp'=>'required|integer',

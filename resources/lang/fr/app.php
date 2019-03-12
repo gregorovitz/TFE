@@ -19,4 +19,6 @@ return[
     'firstname'=>'prénom',
     'email'=>'mail',
     'user'=>'utilisateur',
+    'uncompletProfiel'=>"votre profil n'est pas complet",
+    'welkom'=>"Bienvenu sur l'application du Placet.",
 ];

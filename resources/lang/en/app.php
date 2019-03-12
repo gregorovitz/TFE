@@ -19,5 +19,7 @@ return[
     'firstname'=>'firstname',
     'email'=>'email',
     'user'=>'user',
+    'uncompletProfiel'=>"Your profile isn't complete.",
+    'welkom'=>"Welcome to the Placet's app."
 
 ];

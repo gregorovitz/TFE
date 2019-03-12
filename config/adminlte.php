@@ -120,18 +120,17 @@ return [
             'url'         => 'roles',
             'icon'        => 'cog',
             'can'         =>'role-list',
-
         ],
         [
             'text'        => 'permissions',
             'url'         => 'permissions',
             'icon'        => 'cog',
-            'can'         =>'permission-list'
-
+            'can'         =>'permission-list',
         ],
         [
-            'text'    => 'location',
+            'text'    => 'booking',
             'icon'    => 'share',
+            'can'   =>'display-calendar',
             'submenu' => [
 
                 [
@@ -144,12 +143,23 @@ return [
                     'url'=>'location/3',
                     'icon'=>'calendar',
                 ],
+            ]
+        ],
+        [
+            'text'=>'interne',
+            'icon'=>'share',
+            'can'=>'display-intern-calendar',
+            'submenu' => [
                 [
-                    'text'=>'interne',
-                    'url'=>'#',
+                    'text'=>'grande salle',
+                    'url'=>'location/2',
                     'icon'=>'calendar',
-                    'can'=>'display-intern-calendar'
-                 ],
+                ],
+                [
+                    'text'=>'salle 2',
+                    'url'=>'location/3',
+                    'icon'=>'calendar',
+                ],
             ]
         ]
 

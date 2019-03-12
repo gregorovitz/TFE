@@ -29,6 +29,11 @@
         </div>
     </div>--}}
     <div class ="panel panel-primary">
+        @if (Session::has('success'))
+            <div class="alert alert-success">{{Session::get('success')}}</div>
+        @elseif (Session::has('warning'))
+            <div class="alert alert-danger">{{Session::get('warning')}}</div>
+        @endif
         <div class="panel-heading">My Event Details</div>
         <div class="panel-body">
 
@@ -247,11 +252,11 @@
                     </div>
                 </div>
                 <div class=" text-center modal-footer">
-                    {!! Form::submit('ok',['class'=>'btn btn-primary']) !!}
 
+                    <a href='' id="print" class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
                 </div>
 
-                {!! Form::close() !!}
+
             </div>
         </div>
     </div>

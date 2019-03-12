@@ -68,11 +68,11 @@
                                                             <p>{{Auth::user()->name  }} {{Auth::user()->firstname}} <small>membre since : {{Auth::user()->created_at}}</small></p>
                                                         </li>
                                                         <li class="user-body">
-                                                            @role('visitor')
-                                                                <p>Visitor</p>
-                                                            @else
-                                                                <p>you are not a visitor</p>
-                                                            @endrole
+                                                            @if(!empty(Auth::user()->getRoleNames()))
+                                                                @foreach(Auth::user()->getRoleNames() as $v)
+                                                                    <label>{{ $v }}</label>
+                                                                @endforeach
+                                                            @endif
                                                         </li>
                                                         <li class="user-footer">
                                                             <div class="pull-left">
