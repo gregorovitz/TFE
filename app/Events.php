@@ -25,5 +25,8 @@ class Events extends Model
     {
         return $this->belongsTo('App\User','userId');
     }
-
+    public function interne()
+    {
+        return $this->belongsTo('App\EventIntern','interneId');
+    }
 }

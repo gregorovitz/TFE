@@ -44,5 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Events');
     }
+    public function interne()
+    {
+        return $this->belongsToMany('App\EventInterne','interne_has_user','userId','interneId');
+    }
 
 }
