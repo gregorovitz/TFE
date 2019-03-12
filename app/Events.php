@@ -27,6 +27,6 @@ class Events extends Model
     }
     public function interne()
     {
-        return $this->belongsTo('App\EventIntern','interneId');
+        return $this->hasOne('App\EventIntern','eventId');
     }
 }

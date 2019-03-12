@@ -19,15 +19,6 @@
 
 @endsection
 @section('content')
-   {{-- <div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">grande Salle</button>
-            <button type="button" class="btn btn-secondary">salle 2</button>
-            @can('display-intern-calendar')
-            <button type="button" class="btn btn-secondary">callendrier interne</button>
-            @endcan
-        </div>
-    </div>--}}
     <div class ="panel panel-primary">
         @if (Session::has('success'))
             <div class="alert alert-success">{{Session::get('success')}}</div>
@@ -50,7 +41,7 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                    {!! Form::open(array('route'=>'location.add','method'=>'POST','files'=>'true')) !!}
+                        {!! Form::open(['url' => '/event']) !!}
                     <div class ="row">
                         @if (Session::has('success'))
                             <div class="alert alert-success">{{Session::get('success')}}</div>
@@ -137,129 +128,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="Modalview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Information</h4>
-                </div>
-                <div class="modal-body">
 
-                    <div class="container col-12">
-                        <div class="row ">
-                            <div >
-                                <p id="title"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> Nom :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="name"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> firstname :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="firstname"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> organisation/Asbl/autre :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="organisation"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p>adresse:</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="address"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> code postal :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="zip"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> ville/commune :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="city"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> téléphone :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="phone"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> email :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="mail"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> date début :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="start_date"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> date fin :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="end_date"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> type d'évènement :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="type"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p> nombre de personne attendu :</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p id="peopleExp"></p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class=" text-center modal-footer">
-
-                    <a href='' id="print" class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
 
 
 @stop

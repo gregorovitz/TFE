@@ -8,11 +8,11 @@ class EventIntern extends Model
 {
     protected $table='eventintern';
     protected $fillable=[
-        'evaluation','age','programme','participant','budget','secteurId'
+        'evaluation','age','programme','participant','budget','secteurId','eventId'
     ];
     public function event()
     {
-        return $this->hasOne('App\Events','bookingId');
+        return $this->belongsTo('App\Events','eventId');
     }
     public function secteur()
     {
