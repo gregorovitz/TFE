@@ -53,7 +53,7 @@
                             <div class="alert alert-danger">{{Session::get('warning')}}</div>
                         @endif
                     </div>
-                    {{Form::hidden('roomsId',3)}}
+                    {{Form::hidden('roomsId',3,['id'=>'room'])}}
                         {!! $errors->first('roomsId','<p class="alert alert-danger">:message</p>') !!}
 
                     {{--<div class="col-xs-4 col-sm-4 col-md-4">--}}
@@ -140,40 +140,7 @@
                     <h4 class="modal-title" id="myModalLabel">Information</h4>
                 </div>
                 <div class="modal-body">
-                    {{--{!! Form::open() !!}
-                    <div class ="row">
-                        @if (Session::has('success'))
-                            <div class="alert alert-success">{{Session::get('success')}}</div>
-                        @elseif (Session::has('warning'))
-                            <div class="alert alert-danger">{{Session::get('warning')}}</div>
-                        @endif
-                    </div>
 
-                        <div class="form-group">
-                            {!! Form::label('event_name','Event Name:') !!}
-                            <div class="">
-                                {!! Form::text('event_name',null,['disabled','id'=>'title']) !!}
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            {!! Form::label('start_date','Start Date:') !!}
-                            <div class="">
-                                {!! Form::datetime('start_date',null,['id'=>'start_event','disabled']) !!}
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            {!! Form::label('end_date','End Date:') !!}
-                            <div class="">
-                                {!! Form::datetime('end_date',null,['id'=>'end_event','disabled']) !!}
-
-                            </div>
-                        </div>--}}
                     <div class="container col-12">
                         <div class="row ">
                             <div >

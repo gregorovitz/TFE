@@ -6,6 +6,7 @@ use App\Booking;
 use App\TypeEvents;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -73,7 +74,7 @@ class LocationGSController extends Controller
             'dayClick'=> "function(date) {
             $('#myModal').modal();
             var date1=date.format();
-            
+            $('#room').val($room);
             $('#start').val(date1);
             $('#end').val(date1);
             return false
@@ -125,10 +126,21 @@ class LocationGSController extends Controller
         ]);
         if ($validator->fails()){
             \Session::flash('warning','please enter the valid details');
-            return Redirect::to('/location')->withInput()->withErrors($validator);
+            return Redirect::to('/location/'.$request{'roomsId'})->withInput()->withErrors($validator);
 
         }
+       $start=$request['start_date'].' '.$request['start_time'];
+        $end=$request['end_date'].' '.$request['end_time'];
 
+        $plagehoraireoccuper=DB::select('call isdispo("'.$start.'","'.$end.'",'.$request{'roomsId'}.')');
+        if ($plagehoraireoccuper ==null){
+
+        }
+        else {
+            \Session::flash('warning','this time slot is already occupied');
+            return Redirect::to('/location/'.$request['roomsId'])->withInput()->withErrors($validator);
+
+        }
         $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
         $booking=new Booking;
         $booking->name=$nameBooking;
@@ -150,7 +162,7 @@ class LocationGSController extends Controller
         $event->bookingId=$bookingid;
         $event->save();
         \Session::flash('success','Event added successfully');
-        return Redirect::to('/location');
+        return Redirect::to('/location/'.$request{'roomsId'});
 
     }
 }
