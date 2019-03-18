@@ -145,7 +145,7 @@ return [
                 ],
             ]
         ],
-        [
+        /*[
             'text'=>'interne',
             'icon'=>'share',
             'can'=>'display-intern-calendar',
@@ -161,7 +161,7 @@ return [
                     'icon'=>'calendar',
                 ],
             ]
-        ]
+        ]*/
 
                 //        'ACCOUNT SETTINGS',
 //        'can'=>'disabled',

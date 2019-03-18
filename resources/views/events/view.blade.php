@@ -2,135 +2,43 @@
 /**
  * Created by PhpStorm.
  * User: Marqu
- * Date: 12/03/2019
- * Time: 13:13
+ * Date: 14/03/2019
+ * Time: 13:29
  */
-
 ?>
-@extends('adminlte::page')
+@extends('layouts.datatable')
 @section('title', 'appCentrePlacet')
 @section('content_header')
-    <h1>@lang('app.events')</h1>
+    <h1>@lang('app.Booking')</h1>
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('location.show',['id'=>$event->roomId]) }}"> @lang('app.back')</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="container col-12">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> Nom :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="name">{{$event->user->name}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> firstname :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="firstname">{{$event->user->firstname}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> organisation/Asbl/autre :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="organisation">{{$event->user->organisation->name}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p>adresse:</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="address">{{$event->user->street.' '.$event->user->streetNum}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> code postal :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="zip">{{$event->user->city->zipCode}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> ville/commune :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="city">{{$event->user->city->name}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> téléphone :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="phone">{{$event->user->phone}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> email :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="mail">{{$event->user->email}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> date début :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="start_date">{{$event->start_date.' '.$event->startime}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> date fin :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="end_date">{{$event->end_date.' '.$event->endtime}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> type d'évènement :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="type">{{$event->type->name}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> nombre de personne attendu :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="peopleExp">{{$event->numPeopleExp}}</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class=" row">
-
-    <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
-    <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
-    <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
-    </div>
+    <table class="table table-bordered" id="Event-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Organisation</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+        </thead>
+    </table>
 @stop
+
+@push('js')
+    <script>
+        $(function() {
+            $('#Event-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('event.data') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'updated_at', name: 'updated_at' }
+                ]
+            });
+        });
+    </script>
+@endpush

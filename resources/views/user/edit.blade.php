@@ -42,7 +42,7 @@
             <div class="form-group has-feedback {{ $errors->has('street') ? 'has-error' : '' }}">
                 <input type="text" name="street" class="form-control" @if($user->street!="none")value="{{$user->street }} " @endif
                        placeholder="{{ trans('adminlte::adminlte.street') }}">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
                 @if ($errors->has('street'))
                     <span class="help-block">
                             <strong>{{ $errors->first('street') }}</strong>
@@ -52,7 +52,7 @@
             <div class="form-group has-feedback {{ $errors->has('streetNum') ? 'has-error' : '' }}">
                 <input type="text" name="streetNum" class="form-control"@if($user->streetNum!="none") value="{{$user->streetNum }}" @endif
                        placeholder="{{ trans('adminlte::adminlte.streetNum') }}">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
                 @if ($errors->has('streetNum'))
                     <span class="help-block">
                             <strong>{{ $errors->first('streetNum') }}</strong>
@@ -62,7 +62,7 @@
             <div class="form-group has-feedback {{ $errors->has('boxNum') ? 'has-error' : '' }}">
                 <input type="text" name="boxNum" class="form-control" value="{{ $user->boxNum }}"
                        placeholder="{{ trans('adminlte::adminlte.box') }}">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
                 @if ($errors->has('boxNum'))
                     <span class="help-block">
                             <strong>{{ $errors->first('boxNum') }}</strong>
@@ -72,7 +72,7 @@
             <div class="form-group has-feedback {{ $errors->has('phone') ? 'has-error' : '' }}">
                 <input type="text" name="phone" class="form-control" @if($user->phone!="none") value="{{ $user->phone }}" @endif
                        placeholder="{{ trans('adminlte::adminlte.phone') }}">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
                 @if ($errors->has('phone'))
                     <span class="help-block">
                             <strong>{{ $errors->first('phone') }}</strong>

@@ -7,7 +7,12 @@
  */
 ?>
 @extends('adminlte::page')
-
+@section('css')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+@stop
+@section('js')
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+@stop
 @section('content')
     <table class="table table-hover nowrap table-bordered" id="table"  width="100%">
         <thead>

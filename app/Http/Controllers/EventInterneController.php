@@ -1,29 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\EventIntern;
+use App\Partenaire;
 use App\Room;
-use App\TypeEvents;
-use App\Http\Requests\storeEventRequest;
+use App\Secteur;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use App\Events;
-use Illuminate\Support\Facades\Auth;
-use App\Booking;
-use Yajra\DataTables\DataTables;
-class EventController extends Controller
-{
-    public function index(){
-        return view('events.view');
-    }
-    public function anyData(){
-        return DataTables::of(Events::query())->make(true);
-    }
+use App\Http\Requests\StoreEventInterneRequest;
 
+
+
+class EventInterneController extends Controller
+{
     public function show($id){
 
-        return view('events.show', ['event' => Events::findOrFail($id)]);
+        return view('eventInterne.show', ['eventInterne' => EventIntern::findOrFail($id)]);
     }
-    public function store(storeEventRequest $request)
+    public function store(StoreEventInterneRequest $request)
     {
         $start=$request['start_date'].' '.$request['start_time'];
         $end=$request['end_date'].' '.$request['end_time'];
@@ -35,15 +29,10 @@ class EventController extends Controller
         else {
             \Session::flash('warning','this time slot is already occupied');
             return Redirect::to('/location/'.$request['roomsId'])->withInput();
+            ;
 
         }
-        $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
-        $booking=new Booking;
-        $booking->name=$nameBooking;
-        $booking->userId=Auth::user()->id;
-        $booking->save();
-        $bookingIds=Booking::where('name','=',$nameBooking)->select('id')->get();
-        $bookingid=$bookingIds[0]->id;
+
         //        echo($nameBooking);die();
         $event=new Events;
         $event->name=$request['event_name'];
@@ -53,9 +42,9 @@ class EventController extends Controller
         $event->startime=$request['start_time'];
         $event->endtime=$request['end_time'];
         $event->roomId=$request{'roomsId'};
-        $event->typeEventsId=$request['typeEventsId'];
+
         $event->userId=Auth::user()->id;
-        $event->bookingId=$bookingid;
+
         $event->url='event';
         $event->save();
         \Session::flash('success','Event added successfully');
@@ -63,10 +52,11 @@ class EventController extends Controller
 
     }
     public function create($date,$hour,$room){
-        $typesEvents=TypeEvents::pluck('name','id');
+        $partenaire=Partenaire::pluck('name','id');
         $dataroom=Room::findOrFail($room);
+        $secteur=Secteur::pluck('name','id');
 
-        return view('events.create',compact('typesEvents','date','hour','dataroom'));
+        return view('eventInterne.create',compact('secteur','partenaire','date','hour','dataroom'));
     }
     public function edit($id)
     {
@@ -77,4 +67,6 @@ class EventController extends Controller
         return view();
     }
 
+
 }
+

@@ -23,7 +23,7 @@
             <td>
 
                 {{--@can('permission-edit')--}}
-                <a  href="{{ route('permissions.edit',[$permission->id,'lang'=>session('applocale')]) }}"class="btn btn-squared btn-outline-primary"><i class="icmn-pencil" aria-hidden="true"></i>  @lang('app.edit')</a>
+                {{--<a  href="{{ route('permissions.edit',[$permission->id,'lang'=>session('applocale')]) }}"class="btn btn-squared btn-outline-primary"><i class="icmn-pencil" aria-hidden="true"></i>  @lang('app.edit')</a>--}}
                 {{--//@endcan--}}
                 {{--//@can('permission-delete')--}}
                 {!! Form::open(['method' => 'DELETE','route' => ['permissions.destroy', $permission->id,'lang'=>session('applocale')],'style'=>'display:inline']) !!}

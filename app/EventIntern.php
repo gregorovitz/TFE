@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Http\Requests\StoreEventInterneRequest;
 class EventIntern extends Model
 {
     protected $table='eventintern';

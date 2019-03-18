@@ -13,5 +13,6 @@ class Secteur extends Model
     {
         return $this->hasMany('App\EventIntern');
     }
+    protected $table='secteur';
 
 }

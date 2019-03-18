@@ -21,4 +21,5 @@ return[
     'user'=>'utilisateur',
     'uncompletProfiel'=>"votre profil n'est pas complet",
     'welkom'=>"Bienvenu sur l'application du Placet.",
+    'Booking'=>'Location',
 ];
