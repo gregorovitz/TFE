@@ -12,6 +12,6 @@ class TypeEvents extends Model
     protected $table='typeevents';
     public function event()
     {
-        return $this->hasMany('App\Events');
+        return $this->belongsToMany('App\Events','event_has_type','typeId','eventId');
     }
 }

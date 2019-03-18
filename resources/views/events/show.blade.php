@@ -111,7 +111,12 @@
                         <p> type d'évènement :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="type">{{$event->type->name}}</p>
+                        <p id="type">@if(!empty($event->type))
+                                @foreach($event->type as $v)
+
+                                    {!! $v->name !!}
+                                @endforeach
+                            @endif</p>
                     </div>
                 </div>
                 <div class="row">

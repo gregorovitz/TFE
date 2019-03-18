@@ -24,7 +24,11 @@ class PermissionTableSeeder extends Seeder
             'permission-list',
             'permission-create',
             'permission-edit',
-            'display-intern-calendar'
+            'display-intern-calendar',
+            'display-calendar',
+            'validate-event',
+            'print-event',
+            'edit-event'
 
         ];
 
@@ -32,7 +36,7 @@ class PermissionTableSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-        $role=Role::create(['name'=>'visitor'])->givePermissionTo('user-edit');
+        $role=Role::create(['name'=>'visitor'])->givePermissionTo('user-edit','display-calendar');
         $roleA=Role::create(['name'=>'super-admin'])->givePermissionTo([Permission::all()]);
     }
 }

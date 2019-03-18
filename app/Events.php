@@ -11,7 +11,7 @@ class Events extends Model
     ];
     public function booking()
     {
-        return $this->belongsTo('App\Booking','bookingId');
+        return $this->belongsToMany('App\Booking','event_has_booking','eventID','bookingId');
     }
     public function room()
     {
@@ -19,7 +19,7 @@ class Events extends Model
     }
     public function type()
     {
-        return $this ->belongsTo('App\TypeEvents','typeEventsId');
+        return $this ->belongsToMany('App\TypeEvents','event_has_type','eventId','typeId');
     }
     public function user()
     {

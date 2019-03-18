@@ -11,7 +11,7 @@ class Booking extends Model
     ];
     public function events()
     {
-        return $this->hasOne('App\Events');
+        return $this->belongsToMany('App\Events','event_has_booking','bookingId','eventId');
     }
     public function user()
     {

@@ -53,11 +53,11 @@ class EventController extends Controller
         $event->startime=$request['start_time'];
         $event->endtime=$request['end_time'];
         $event->roomId=$request{'roomsId'};
-        $event->typeEventsId=$request['typeEventsId'];
         $event->userId=Auth::user()->id;
-        $event->bookingId=$bookingid;
         $event->url='event';
         $event->save();
+        $event->booking()->sync($bookingid);
+        $event->type()->sync($request['typeEventsId']);
         \Session::flash('success','Event added successfully');
         return Redirect::to('/location/'.$request{'roomsId'});
 
