@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/beyondcode/laravel-dump-server" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/components/flag-icon-css" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
@@ -37,8 +38,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/iso3166" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maddhatter/laravel-fullcalendar" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/complex" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/matrix" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
@@ -59,7 +58,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpspreadsheet" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpword" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpspec/prophecy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
@@ -114,7 +112,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-buttons" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-editor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-fractal" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-html" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-oracle" />

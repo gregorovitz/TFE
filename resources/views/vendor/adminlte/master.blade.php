@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="{{app()->getLocale()}}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +28,7 @@
         <!-- DataTables with bootstrap 3 style -->
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     @endif
-
+    <link rel="stylesheet" type="text/css" href="/flag-icon-css/css/flag-icon.min.css">
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>

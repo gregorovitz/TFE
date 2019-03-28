@@ -18,7 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
+Route::get('locale/{locale}', function ($locale) {
+    \Session::put('locale', $locale);
+    return redirect()->back();
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 

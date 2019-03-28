@@ -1,3 +1,4 @@
+<?php $path='';?>
 @extends('adminlte::master')
 
 @section('adminlte_css')
@@ -54,9 +55,79 @@
                                     </a>
                                 @endif
                                 <!-- Navbar Right Menu -->
+
+
+
+
+
                                     <div class="navbar-custom-menu">
 
                                         <ul class="nav navbar-nav">
+                                            <li >
+                                                <a href="locale/en">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="locale/fr">
+                                                    <span class="flag-icon flag-icon-fr"></span>
+                                                </a>
+                                            </li>
+                                           {{-- @foreach ( config('app.locales') as $local_code => $local_string)
+                                                <?php
+                                                $url=explode('/'.$local_code.'/',\Illuminate\Support\Facades\URL::current());
+                                                if (isset($url[1])){
+                                                    $path=$url[1];
+                                                }
+                                                ?>
+                                            @endforeach
+                                            @foreach ( config('app.locales') as $local_code => $local_string)
+
+                                                @if($local_string !== config('app.lang_name'))
+                                                    <?php
+                                                    $style = 'padding:0';
+                                                    if ($local_code == session('applocale')){
+                                                        $style = 'padding:0;border-bottom:2px solid red;';
+                                                    }
+                                                    ?>@if($local_code=='en')
+                                                       <li >
+                                                            <a style='<?php echo $style;?>' href="{!! url('/locale') !!}/{{ $local_code }}">
+                                                                <span class="flag-icon flag-icon-gb"></span>
+                                                            </a>
+                                                       </li>
+                                                    @else
+                                                      <li>
+                                                            <a style='<?php echo $style;?>' href="{!! url('/locale') !!}/{{ $local_code }}">
+                                                                <span class="flag-icon flag-icon-{{$local_code}}"></span>
+                                                            </a>
+                                                      </li>
+                                                    @endif
+                                                @endif
+                                            @endforeach--}}
+                                            {{-- @if(session('locale')=='en')
+                                                <a class="nav-link col-1" href="#"   >
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </a>
+                                            @else
+                                            <a class="nav-link col-1" href="#"   >
+                                                <span class="flag-icon flag-icon-{{session('locale')}}"></span>
+                                            </a>
+                                            @endif
+                                            </div>
+                                            @foreach(config('app.locales') as $locale)
+                                            <div class="cat__top-bar__item">
+                                                @if($locale != session('locale'))
+                                                    @if($locale=='en')
+                                                        <a class="nav-link col-1"  href="{{ route('language', $locale) }}">
+                                                            <span class="flag-icon flag-icon-gb"></span>
+                                                        </a>
+                                                    @endif
+                                            <a class="nav-link col-1" href="{{ route('language', $locale) }}">
+                                                <span class="flag-icon flag-icon-{{$locale}}"></span>
+                                            </a>
+                                                @endif
+                                            </div>
+                                            @endforeach--}}
 
                                             @auth
                                                 <li class="dropdown user user-menu">

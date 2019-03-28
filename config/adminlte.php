@@ -117,7 +117,7 @@ return [
         ],
         [
             'text'        => 'roles',
-            'url'         => 'roles',
+            'url'         => "/roles",
             'icon'        => 'cog',
             'can'         =>'role-list',
         ],

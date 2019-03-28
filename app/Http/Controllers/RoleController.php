@@ -16,10 +16,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-//        $this->middleware('permission:role-list');
-//        $this->middleware('permission:role-create', ['only' => ['create','store']]);
-//        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-//        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+       $this->middleware('permission:role-list');
+        $this->middleware('permission:role-create', ['only' => ['create','store']]);
+       $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+       $this->middleware('permission:role-delete', ['only' => ['destroy']]);
   }
 
 
@@ -75,7 +75,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($lang,$id)
     {
         $role = Role::find($id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
@@ -93,7 +93,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($lang,$id)
     {
         $role = Role::find($id);
         $permission = Permission::get();
@@ -113,7 +113,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$lang, $id)
     {
         $this->validate($request, [
             'name' => 'required',
