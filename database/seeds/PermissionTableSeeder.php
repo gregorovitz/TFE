@@ -28,7 +28,10 @@ class PermissionTableSeeder extends Seeder
             'display-calendar',
             'validate-event',
             'print-event',
-            'edit-event'
+            'edit-event',
+            'show-event-interne',
+            'show-event',
+
 
         ];
 

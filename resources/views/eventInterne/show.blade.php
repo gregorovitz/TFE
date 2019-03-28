@@ -28,98 +28,82 @@
             <div class="container col-12">
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> Nom :</p>
+                        <p> Responsable :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="name">{{$eventInterne->event->user->name}}</p>
+                        <p id="name">{{$eventInterne->event->user->name.' '.$eventInterne->event->user->firstname}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> firstname :</p>
+                        <p> evaluation :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="firstname">{{$eventInterne->event->user->firstname}}</p>
+                        <p id="firstname"><a href="{{$eventInterne->evaluation}}">evaluation</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> organisation/Asbl/autre :</p>
+                        <p>programme:</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="organisation">{{$eventInterne->event->user->organisation->name}}</p>
+                        <p id="address"><a href="{{$eventInterne->programme}}">programme</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p>adresse:</p>
+                        <p> age :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="address">{{$eventInterne->event->user->street.' '.$eventInterne->event->user->streetNum}}</p>
+                        <p id="zip">{{$eventInterne->age}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> code postal :</p>
+                        <p> participant :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="zip">{{$eventInterne->event->user->city->zipCode}}</p>
+                        <p id="city"><a href="{{$eventInterne->participant}}">liste participant</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> ville/commune :</p>
+                        <p> budget :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="city">{{$eventInterne->event->user->city->name}}</p>
+                        <p id="phone">{{$eventInterne->budget}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> téléphone :</p>
+                        <p> date :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="phone">{{$eventInterne->event->user->phone}}</p>
+                        <p id="mail">{{$eventInterne->event->start_date.' '.$eventInterne->event->startime.' - '.$eventInterne->event->end_date.' '.$eventInterne->event->endtime}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> email :</p>
+                        <p> nom :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="mail">{{$eventInterne->event->user->email}}</p>
+                        <p id="start_date">{{$eventInterne->event->name}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> date début :</p>
+                        <p> nombre de participant :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="start_date">{{$eventInterne->event->start_date.' '.$eventInterne->event->startime}}</p>
+                        <p id="end_date">{{$eventInterne->event->numPeopleExp}}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> date fin :</p>
+                        <p> salle:</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="end_date">{{$eventInterne->event->end_date.' '.$eventInterne->event->endtime}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> type d'évènement :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="type">{{$eventInterne->event->type->name}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p> nombre de personne attendu :</p>
-                    </div>
-                    <div class="col-sm-8">
-                        <p id="peopleExp">{{$eventInterne->event->numPeopleExp}}</p>
+                        <p id="peopleExp">{{$eventInterne->event->room->name}}</p>
                     </div>
                 </div>
 

@@ -41,6 +41,7 @@ class CalendrierVisitorController extends Controller
                     $idEvent=$event->id;
                 }else{
                     $idEvent=$event->interne->id;
+
                 }
 
 
@@ -74,14 +75,6 @@ class CalendrierVisitorController extends Controller
                 'locale'=>'fr'
 
             ])->setCallbacks([
-                /* 'dayClick'=> "function(date) {
-                 $('#myModal').modal();
-                 var date1=date.format();
-                 $('#room').val($room);
-                 $('#start').val(date1);
-                 $('#end').val(date1);
-                 return false
-                     }",*/
                 'dayClick'=>"function(date){
             var date1=date.format('YYYY-MM-DD');
             var hour=date.format('hh:mm:ss');
