@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Room;
 use Illuminate\Support\Facades\Auth;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Events;
 class CalendrierVisitorController extends Controller
 {
     public function show($room){
-
+        $Room=Room::findOrFail($room);
 
         if($room==1 ) {
 
@@ -26,7 +27,7 @@ class CalendrierVisitorController extends Controller
             foreach ($events as $key =>$event){
 //              $name='';
                 if (Auth::user()->cannot('display-intern-calendar')) {
-                    if ($event->color == 'blue') {
+                    if (($event->color == 'blue')or($event->color == 'darkgreen')) {
                         $color = 'red';
                         $name='occupé';
                     } else {
@@ -125,7 +126,7 @@ class CalendrierVisitorController extends Controller
                 }"
             ]);
         }
-        return view('calendar.calendar',compact('calendar_details'));
+        return view('calendar.calendar',compact('calendar_details','Room'));
     }
 
 

@@ -108,27 +108,27 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'app.main',
         [
-            'text' => 'users',
+            'text' => 'app.user',
             'url'  => 'user',
             'can'  => 'user-list',
             'icon'=>'user'
         ],
         [
-            'text'        => 'roles',
+            'text'        => 'app.roles',
             'url'         => "/roles",
             'icon'        => 'cog',
             'can'         =>'role-list',
         ],
         [
-            'text'        => 'permissions',
+            'text'        => 'app.permission',
             'url'         => 'permissions',
             'icon'        => 'cog',
             'can'         =>'permission-list',
         ],
         [
-            'text'    => 'booking',
+            'text'    => 'app.Booking',
             'icon'    => 'share',
             'can'   =>'display-calendar',
             'submenu' => [
@@ -144,6 +144,12 @@ return [
                     'icon'=>'calendar',
                 ],
             ]
+        ],
+        [
+            'text'        => 'app.Activities',
+            'url'         => '/eventInterne',
+            'icon'        => 'database',
+            'can'         =>'show-event-interne',
         ],
         /*[
             'text'=>'interne',

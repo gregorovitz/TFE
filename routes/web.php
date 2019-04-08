@@ -25,7 +25,7 @@ Route::get('locale/{locale}', function ($locale) {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('{lang}/roles','RoleController');
+Route::resource('/roles','RoleController');
 Route::resource('/permissions','PermissionController');
 Route::resource('/user','UserController');
 Route::resource('/event','EventController')->except('create');
@@ -33,7 +33,7 @@ Route::resource('/eventInterne','EventInterneController')->except(['create','vie
 Route::resource('/print','ContractPrintLocation');
 
 Route::post('/event','EventController@store')->name('event.add');
-
+route::get('/validate/{id}','EventController@validateEvent')->name('event.validate');
 route::get('/location/{id}','CalendrierVisitorController@show')->name('location.show');
 
 Route::get('/event/{date}/{hour}/{room}/location','EventController@create');

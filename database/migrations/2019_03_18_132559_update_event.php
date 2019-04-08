@@ -31,12 +31,7 @@ class UpdateEvent extends Migration
         Schema::table('events',function($table){
             $table->unsignedInteger('typeEventsId');
             $table->unsignedInteger('bookingId');
-            $table->foreign('bookingId')
-                ->references('id')
-                ->on ('bookings');
-            $table->foreign('typeEventsId')
-                ->references('id')
-                ->on('typeevents');
+
         });
     }
 }

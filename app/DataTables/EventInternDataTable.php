@@ -56,7 +56,7 @@ class EventInternDataTable extends DataTable
                'events.numPeopleExp as nbParticipant',
                'rooms.name as room',
                DB::raw('concat(events.start_date," ",events.startime," - ",events.end_date," ",events.endtime ) as date'),
-//               DB::raw('CONCAT(users.firstname," ",users.name)as responsable'))
+               DB::raw('CONCAT(users.firstname," ",users.name)as responsable'),
                 'users.firstname',
                 'users.name'
            )

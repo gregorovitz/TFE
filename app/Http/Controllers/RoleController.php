@@ -16,10 +16,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-       $this->middleware('permission:role-list');
+       /*$this->middleware('permission:role-list');
         $this->middleware('permission:role-create', ['only' => ['create','store']]);
        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-       $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+       $this->middleware('permission:role-delete', ['only' => ['destroy']]);*/
   }
 
 
@@ -31,6 +31,8 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id','DESC')->paginate(5);
+
+
         return view('roles.view',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -75,7 +77,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($lang,$id)
+    public function show($id)
     {
         $role = Role::find($id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
@@ -93,7 +95,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($lang,$id)
+    public function edit($id)
     {
         $role = Role::find($id);
         $permission = Permission::get();
@@ -113,7 +115,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$lang, $id)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -138,7 +140,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($lang,$id)
+    public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index',['lang'=>session('applocale')])

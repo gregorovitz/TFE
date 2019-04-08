@@ -46,6 +46,7 @@ class EventController extends Controller
         $bookingid=$bookingIds[0]->id;
         //        echo($nameBooking);die();
         $event=new Events;
+        $event->validate=0;
         $event->name=$request['event_name'];
         $event->numPeopleExp=$request['numPeopleexp'];
         $event->start_date =$request['start_date'];
@@ -75,6 +76,22 @@ class EventController extends Controller
 
 
         return view();
+    }
+    public function validateEvent($id){
+        $event=Events::find($id);
+        $event->validate=1;
+        if ($event->color=='orange'){
+            $event->color='green';
+        }elseif($event->color=='blue') {
+            $event->color='dark_green';
+        }
+        $event->updated_at=now();
+        $event->save();
+
+        return redirect()->to('/location/'.$event->roomId)
+            ->with('success', __('messages.user.update'));
+
+
     }
 
 }

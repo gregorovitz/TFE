@@ -20,7 +20,7 @@
 @endsection
 @section('content')
     <div class ="panel panel-primary">
-        <div class="panel-heading">My Event Details</div>
+        <div class="panel-heading">@lang("app.calendar_title",['room'=>$Room->name])</div>
         <div class="panel-body">
             {!! $calendar_details->calendar() !!}
         </div>

@@ -5,5 +5,14 @@
 	"role-delete":"delete roles",
 	"user-edit" :"edit users",
 	"user-list" : "display list of all user",
-	"user-change-role":"edit role of users"
+	"user-change-role":"edit role of users",
+	"permission-list": "show permissions",
+	"permission-create":"create new permission",
+	"display-intern-calendar":"access on intern calendar",
+	"display-calendar":"acces on extern calendar",
+	"validate-event": "validate rental request",
+	"print-event": "print rental agreement",
+	"edit-event": "edit rentals data ",
+	"show-event-interne": "show activities data",
+	"show-event": "show rental data "
 }

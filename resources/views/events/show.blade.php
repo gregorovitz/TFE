@@ -28,7 +28,7 @@
             <div class="container col-12">
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> Nom :</p>
+                        <p> @lang('app.name') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="name">{{$event->user->name}}</p>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> firstname :</p>
+                        <p> @lang('app.firstname') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="firstname">{{$event->user->firstname}}</p>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> organisation/Asbl/autre :</p>
+                        <p> @lang('app.organisation') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="organisation">{{$event->user->organisation->name}}</p>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p>adresse:</p>
+                        <p>@lang('app.adress') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="address">{{$event->user->street.' '.$event->user->streetNum}}</p>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> code postal :</p>
+                        <p> @lang('app.zip') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="zip">{{$event->user->city->zipCode}}</p>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> ville/commune :</p>
+                        <p> @lang('city') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="city">{{$event->user->city->name}}</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> téléphone :</p>
+                        <p> @lang('app.phone') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="phone">{{$event->user->phone}}</p>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> email :</p>
+                        <p> @lang('app.email') :</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="mail">{{$event->user->email}}</p>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> date début :</p>
+                        <p> @lang('app.date_start') </p>
                     </div>
                     <div class="col-sm-8">
                         <p id="start_date">{{$event->start_date.' '.$event->startime}}</p>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> date fin :</p>
+                        <p> @lang('app.date_end') </p>
                     </div>
                     <div class="col-sm-8">
                         <p id="end_date">{{$event->end_date.' '.$event->endtime}}</p>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> type d'évènement :</p>
+                        <p> @lang('app.event_type') </p>
                     </div>
                     <div class="col-sm-8">
                         <p id="type">@if(!empty($event->type))
@@ -121,7 +121,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> nombre de personne attendu :</p>
+                        <p> @lang('app.participant_exp')</p>
                     </div>
                     <div class="col-sm-8">
                         <p id="peopleExp">{{$event->numPeopleExp}}</p>
@@ -137,13 +137,13 @@
          <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
     @endcan
     @can('validate-event')
-    <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
+    <a href='{{ route('event.validate',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
     @endcan
     @can('edit-event')
     <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.edit')</a>
     @endcan
     </div>
     @else
-    Vous n'êtes pas authorisé à voir c'est donnée
+    @lang("app.unauthorize_show")
     @endcan
 @stop

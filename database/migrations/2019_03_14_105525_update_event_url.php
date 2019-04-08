@@ -15,6 +15,7 @@ class UpdateEventUrl extends Migration
     {
         Schema::table('events',function($table){
             $table->string('url');
+            $table->boolean('validate');
         });
     }
 

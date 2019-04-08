@@ -43,6 +43,7 @@ class EventInterneController extends Controller
         $event->userId=Auth::user()->id;
         $event->url='eventInterne';
         $event->color="blue";
+        $event->validate=0;
         $event->save();
 
         $interne=new EventIntern;
@@ -60,22 +61,23 @@ class EventInterneController extends Controller
 
     }
     public function create($date,$hour,$room){
-        echo 'ocuocu';
+
         $partenaire=Partenaire::pluck('name','id');
-        if (!empty($partenaire)){print_r ($partenaire);};echo ('1');
+
         $dataroom=Room::findOrFail($room);
-        print_r($dataroom);echo('2');
+
         $secteur=Secteur::pluck('name','id');
-        print_r($secteur);echo('3');die();
+
 
         return view('eventInterne.create',compact('secteur','partenaire','date','hour','dataroom'));
     }
+
    /* public function edit($id)
     {
         $event = Events::find($id);
         return view();
     }*/
-    public function index(){
+    /*public function index(){
         return view('eventInterne.view');
     }
 
@@ -120,7 +122,7 @@ class EventInterneController extends Controller
             // permet de retirer une column
             ->removeColumn('updated_at')
             ->make(true);
-        }
+        }*/
 
 }
 

@@ -10,17 +10,17 @@
 @extends('layouts.datatable')
 @section('title', 'appCentrePlacet')
 @section('content_header')
-    <h1>@lang('app.Booking')</h1>
+    <h1>@lang('app.permission')</h1>
 @stop
 @section('content')
     <table class="table table-bordered" id="EventInterne-table">
         <thead>
             <tr>
                 <th>id</th>
-                <th>name</th>
-                <th>Action</th>
-                <th>created_at</th>
-                <th>updated_at</th>
+                <th>@lang('app.name')</th>
+                <th>@lang('app.permission')</th>
+                <th>@lang('app.created_at')</th>
+                <th>@lang('app.updated_at')</th>
 
             </tr>
         </thead>
@@ -38,7 +38,7 @@
                 columns:[
                     {data:'id', name:'id'},
                     {data:'name', name:'name'},
-                    {data:'Action', name:'Action'},
+                    {data:'name_view', name:'name_view'},
                     {data:'created_at', name:'created_at'},
                     {data:'updated_at', name:'updated_at'}
 

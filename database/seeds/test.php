@@ -18,8 +18,11 @@ class test extends Seeder
         $typesEvent=factory(App\TypeEvents::class,3)->create();
         $room=\App\Room::create(['name'=>'all']);
 
+        $sector=\App\Secteur::create(['name'=>'CEC']);
         DB::table('Rooms')->insert(
-            array('name'=>'Grande Salle'));
+            array('name'=>'Grande Salle'),
+            array('name'=>'salle 2')
+        );
 
     }
 }

@@ -19,7 +19,7 @@
 
     @foreach ($permissions as $key => $permission)
         <tr>
-            <td>{{ $permission->name }}</td>
+            <td>{{ __($permission->name) }}</td>
             <td>
 
                 {{--@can('permission-edit')--}}

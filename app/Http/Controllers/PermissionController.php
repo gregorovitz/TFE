@@ -31,7 +31,7 @@ class PermissionController extends Controller
 
    public function index (Request $request){
        $permissions = Permission::all();
-       return view('view1',compact('permissions'));
+       return view('permission.view1',compact('permissions'));
    }
    public function getPermission(){
        return DataTables::of(Permission::query())
@@ -49,7 +49,9 @@ class PermissionController extends Controller
            // align le text  au centre dans les lignes du da tatable
            ->setRowAttr(['align'=>'center'])
             // permet l'ajout d'une column
-           ->addColumn('Action', 'print')
+           ->addColumn('name_view', function(Permission $permission){
+               return __($permission->name);
+            })
            ->make(true);
    }
 

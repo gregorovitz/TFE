@@ -5,5 +5,15 @@
 	"role-delete":"supprimer des rôles",
 	"user-edit" :"modifier les utilisateur",
 	"user-list" : "afficher la liste des utilisateur",
-	"user-change-role":"modifier les roles des utilisateur"
+	"user-change-role":"modifier les roles des utilisateur",
+	"permission-list": "afficher les permission",
+	"permission-create":"créer de nouvelle permission",
+	"display-intern-calendar":"accés au calendrier interne",
+	"display-calendar":"accès au calendrier externe",
+	"validate-event": "valider les demande de location",
+	"print-event": "imprimer le contrats de location",
+	"edit-event": "modifier les données des demande de location",
+	"show-event-interne": "afficher les données d'une activité interne",
+	"show-event": "afficher les donnée des locations "
+
 }
