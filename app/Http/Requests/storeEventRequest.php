@@ -32,7 +32,8 @@ class storeEventRequest extends FormRequest
             'end_date' => 'required|date|after_or_equal:start_date',
             'typeEventsId' => 'required|integer|exists:typeevents,id',
             'numPeopleexp' => 'required|integer',
-            'roomsId' => 'required|integer'
+            'roomsId' => 'required|integer',
+            'comment'=>'sometimes|string'
         ];
     }
 

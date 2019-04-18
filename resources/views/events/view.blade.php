@@ -12,7 +12,7 @@
     <h1>@lang('app.Booking')</h1>
 @stop
 @section('content')
-    <table class="table table-bordered" id="Event-table">
+   {{-- <table class="table table-bordered" id="Event-table">
         <thead>
         <tr>
             <th>Id</th>
@@ -22,11 +22,12 @@
             <th>Updated At</th>
         </tr>
         </thead>
-    </table>
+    </table>--}}
+    {!! $dataTable->table(['class'=>'table table-bordered '],true) !!}
 @stop
 
 @push('js')
-    <script>
+    {{--<script>
         $(function() {
             $('#Event-table').DataTable({
                 processing: true,
@@ -40,5 +41,6 @@
                 ]
             });
         });
-    </script>
+    </script>--}}
+    {!! $dataTable->scripts() !!}
 @endpush

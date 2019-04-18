@@ -31,6 +31,16 @@ class PermissionTableSeeder extends Seeder
             'edit-event',
             'show-event-interne',
             'show-event',
+            'show-room',
+            'create-room',
+            'edit-room',
+            'show-typeEvent',
+            'create-typeEvent',
+            'edit-typeEvent',
+            'show-organisation',
+            'create-organisation',
+            'edit-organisation',
+
 
 
         ];

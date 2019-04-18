@@ -75,6 +75,22 @@
                                             </li>
 
                                             @auth
+                                                <li class=dropdown"  onclick="markNotificationAsRead()">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                        <span class="glyphicon glyphicon-globe"></span> Notification <span class="badge">{{count(auth()->user()->unreadNotifications)}}</span>
+                                                    </a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li>
+                                                      @forelse(auth()->user()->unreadNotifications as $notification)
+                                                         @include('layouts.partials.notification.'.snake_case(class_basename($notification->type)))
+                                                          {{--<a href="#">{{snake_case(class_basename($notification->type))}}</a>--}}
+                                                        @empty
+                                                          <a href="#">no unread notifications</a>
+                                                      @endforelse
+
+                                                        </li>
+                                                    </ul>
+                                                </li>
                                                 <li class="dropdown user user-menu">
                                                     <a href="#"class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                         <span class="hidden-xs">{{Auth::user()->name}} {{Auth::user()->firstname}}</span>
@@ -182,4 +198,5 @@
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @stack('js')
     @yield('js')
+    <script src="{{asset('/js/main.js')}}"></script>
 @stop

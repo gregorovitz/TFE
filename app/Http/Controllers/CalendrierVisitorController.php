@@ -26,7 +26,7 @@ class CalendrierVisitorController extends Controller
         if ($events->count()){
             foreach ($events as $key =>$event){
 //              $name='';
-                if (Auth::user()->cannot('display-intern-calendar')) {
+                /*if (Auth::user()->cannot('display-intern-calendar')) {
                     if (($event->color == 'blue')or($event->color == 'darkgreen')) {
                         $color = 'red';
                         $name='occupé';
@@ -43,8 +43,10 @@ class CalendrierVisitorController extends Controller
                 }else{
                     $idEvent=$event->interne->id;
 
-                }
-
+                }*/
+                $name=$event->name;
+                $color=$event->color;
+                $idEvent=$event->id;
 
                 $events_List[]=Calendar::event(
 
@@ -62,7 +64,7 @@ class CalendrierVisitorController extends Controller
                 );
             }
         }
-        if (Auth::user()->can('display-intern-calendar')){
+        /*if (Auth::user()->can('display-intern-calendar')){
             $calendar_details=Calendar::addEvents($events_List)->setOptions([
                 'defaultView'=>'agendaWeek',
                 'selectable'=>'true',
@@ -80,7 +82,7 @@ class CalendrierVisitorController extends Controller
             var date1=date.format('YYYY-MM-DD');
             var hour=date.format('hh:mm:ss');
             var room=$room;
-           window.location.href='/eventInterne/'+date1+'/'+hour+'/'+room+'/activite';;
+           window.location.href='/eventInterne_supprimer/'+date1+'/'+hour+'/'+room+'/activite';;
            }",
                 'eventClick'=>"function(event) {
                 if (event.url) {
@@ -90,7 +92,7 @@ class CalendrierVisitorController extends Controller
             }"
             ]);
         }
-        else{
+        else{*/
             $calendar_details=Calendar::addEvents($events_List)->setOptions([
                 'defaultView'=>'agendaWeek',
                 'selectable'=>'true',
@@ -125,7 +127,7 @@ class CalendrierVisitorController extends Controller
                     }
                 }"
             ]);
-        }
+//        }
         return view('calendar.calendar',compact('calendar_details','Room'));
     }
 

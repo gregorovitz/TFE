@@ -36,7 +36,7 @@
             $('#EventInterne-table').DataTable({
                 processing: true,
                 serverSide:true,
-                ajax: '{!!route('eventInterne.data')  !!}',
+                ajax: '{!!route('eventInterne_supprimer.data')  !!}',
                 columns:[
                 {data: 'id', name: 'id'},
                 {data:'room',name:'room'},

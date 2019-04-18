@@ -18,7 +18,7 @@ class EventInterneController extends Controller
 {
     public function show($id){
 
-        return view('eventInterne.show', ['eventInterne' => EventIntern::findOrFail($id)]);
+        return view('eventInterne_supprimer.show', ['eventInterne_supprimer' => EventIntern::findOrFail($id)]);
     }
     public function store(StoreEventInterneRequest $request)
     {
@@ -41,7 +41,7 @@ class EventInterneController extends Controller
         $event->endtime=$request['end_time'];
         $event->roomId=$request{'roomsId'};
         $event->userId=Auth::user()->id;
-        $event->url='eventInterne';
+        $event->url='eventInterne_supprimer';
         $event->color="blue";
         $event->validate=0;
         $event->save();
@@ -69,7 +69,7 @@ class EventInterneController extends Controller
         $secteur=Secteur::pluck('name','id');
 
 
-        return view('eventInterne.create',compact('secteur','partenaire','date','hour','dataroom'));
+        return view('eventInterne_supprimer.create',compact('secteur','partenaire','date','hour','dataroom'));
     }
 
    /* public function edit($id)
@@ -78,7 +78,7 @@ class EventInterneController extends Controller
         return view();
     }*/
     /*public function index(){
-        return view('eventInterne.view');
+        return view('eventInterne_supprimer.view');
     }
 
     public function anyColumnSearchData(){

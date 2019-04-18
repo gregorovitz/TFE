@@ -25,16 +25,17 @@ class updateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'firstname' =>['required','string','max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user)],
+            'name' => [ 'string', 'max:255'],
+            'firstname' =>['string','max:255'],
+            'email' => [ 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user)],
             'password' => ['sometimes', 'string', 'between:8,20', 'confirmed'],
-            'phone'=>['required','phone:BE'],
-            'street'=>['required','string','max:255'],
-            'streetNum'=>['required','string'],
+            'phone'=>['phone:BE'],
+            'street'=>['string','max:255'],
+            'streetNum'=>['string'],
             'boxNum'=>['sometimes','nullable','string'],
-            'cityId'=>['required','integer'],
-            'organisationId'=>['required','integer','min:2']
+            'cityId'=>['integer'],
+            'organisationId'=>['required_without:organisationAdd','integer','min:2'],
+            'organisationAdd'=>['sometimes','nullable','string','max:255']
         ];
     }
 }

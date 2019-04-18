@@ -29,4 +29,8 @@ class Events extends Model
     {
         return $this->hasOne('App\EventIntern','eventId');
     }
+    public function organisation()
+    {
+        return $this->belongsTo('App\Organisation','organisationId');
+    }
 }

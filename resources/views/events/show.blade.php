@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-
+    @auth
     @if ((Auth::user()->can('show-event'))or ($event->user->id==Auth::user()->id))
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -47,7 +47,7 @@
                         <p> @lang('app.organisation') :</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="organisation">{{$event->user->organisation->name}}</p>
+                        <p id="organisation">{{$event->organisation->name}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -127,6 +127,14 @@
                         <p id="peopleExp">{{$event->numPeopleExp}}</p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p> @lang('app.comment')</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p id="peopleExp">{{$event->commentaire}}</p>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -146,4 +154,5 @@
     @else
     @lang("app.unauthorize_show")
     @endcan
+    @endauth
 @stop

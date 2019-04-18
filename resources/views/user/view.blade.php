@@ -37,7 +37,7 @@
                     <a href="{{ route('user.show',[$user->id]) }}"class="btn btn-squared btn-outline-success">@lang('app.display')</a>
                 {{--@endif--}}
                 {{--@if ((auth()->user()->can('user-edit')&&($id==$user->id))||(auth()->user()->hasrole('Admin')))--}}
-                    <a href="{{ route('user.edit',[$user->id]) }}"class="btn btn-squared btn-outline-primary">
+                    <a href="{{ route('user_role.edit',[$user->id]) }}"class="btn btn-squared btn-outline-primary">
                         <i class="icmn-pencil" aria-hidden="true"></i>
                         @lang('app.edit')
                     </a>

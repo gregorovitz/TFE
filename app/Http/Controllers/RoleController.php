@@ -68,7 +68,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('roles.index',['lang'=>session('applocale')])
+        return redirect()->route('roles.index')
             ->with('success',__('messages.roles.create'));
     }
     /**

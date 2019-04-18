@@ -24,7 +24,7 @@
 
     <div>
         <div>
-            {!! Form::open(['url' => '/eventInterne']) !!}
+            {!! Form::open(['url' => 'eventInterne_supprimer']) !!}
             <div class ="row">
                 @if (Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>

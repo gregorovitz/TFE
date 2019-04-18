@@ -26,6 +26,10 @@
         </thead>
 
     </table>
+    <div class="btn-group mr-2 mb-2">
+        <a href='/{!! session("applocale") !!}permissions/create' class="btn btn-squared btn-outline-warning">@lang('app.create')</a>
+    </div>
+
 @stop
 
 @push('js')

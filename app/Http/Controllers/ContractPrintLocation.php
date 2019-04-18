@@ -14,6 +14,10 @@ class contractPrintLocation extends Controller
     public function show($id){
         // Template processor instance creation
         $event=Events::findOrFail($id);
+        $types='';
+        foreach ($event->type as $type){
+            $types.=$type->name;
+        }
         //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('Template.docx'));
         $name = new TextRun();
@@ -32,13 +36,19 @@ class contractPrintLocation extends Controller
         $mail->addText($event->user->email, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('mail', $mail);
         $date = new TextRun();
-        $date->addText($event->start_date.' - '.$event->end_date, array('bold' => true,  'color' => 'black'));
-        $templateProcessor->setComplexValue('date', $date);
+        if($event->start_date!=$event->end_date){
+            $date->addText($event->start_date.' - '.$event->end_date, array('bold' => true,  'color' => 'black'));
+            $templateProcessor->setComplexValue('date', $date);
+        }else{
+            $date->addText($event->start_date, array('bold' => true,  'color' => 'black'));
+            $templateProcessor->setComplexValue('date', $date);
+        }
+
         $horaire = new TextRun();
         $horaire->addText($event->startime.' - '.$event->endtime, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('horaire', $horaire);
         $type = new TextRun();
-        $type->addText($event->type->name, array('bold' => true,  'color' => 'black'));
+        $type->addText($types, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('type', $type);
         $people = new TextRun();
         $people->addText($event->numPeopleExp, array('bold' => true,  'color' => 'black'));

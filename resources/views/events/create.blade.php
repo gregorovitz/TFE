@@ -97,6 +97,13 @@
                 {!! $errors->first('end_time','<p class="alert alert-danger">:message</p>') !!}
             </div>
         </div>
+        <div class="form-group">
+            {!! Form::label('comment',__('app.comment')) !!}
+            <div class="">
+                {!! Form::text('comment',null,['class'=>'form-control','id'=>'comment']) !!}
+                {!! $errors->first('comment','<p class="alert alert-danger">:message</p>') !!}
+            </div>
+        </div>
         {{--</div>--}}
     </div>
 </div>

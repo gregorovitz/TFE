@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Notifications\RentalRequest;
 use App\Room;
 use App\TypeEvents;
 use App\Http\Requests\storeEventRequest;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Events;
@@ -12,12 +14,12 @@ use App\Booking;
 use Yajra\DataTables\DataTables;
 class EventController extends Controller
 {
-    public function index(){
+   /* public function index(){
         return view('events.view');
     }
     public function anyData(){
         return DataTables::of(Events::query())->make(true);
-    }
+    }*/
 
     public function show($id){
 
@@ -25,7 +27,7 @@ class EventController extends Controller
     }
     public function store(storeEventRequest $request)
     {
-        $start=$request['start_date'].' '.$request['start_time'];
+        /*$start=$request['start_date'].' '.$request['start_time'];
         $end=$request['end_date'].' '.$request['end_time'];
 
         $plagehoraireoccuper=DB::select('call isdispo("'.$start.'","'.$end.'",'.$request{'roomsId'}.')');
@@ -36,7 +38,7 @@ class EventController extends Controller
             \Session::flash('warning','this time slot is already occupied');
             return Redirect::to('/location/'.$request['roomsId'])->withInput();
 
-        }
+        }*/
         $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
         $booking=new Booking;
         $booking->name=$nameBooking;
@@ -53,13 +55,23 @@ class EventController extends Controller
         $event->end_date=$request['end_date'];
         $event->startime=$request['start_time'];
         $event->endtime=$request['end_time'];
-        $event->roomId=$request{'roomsId'};
+        $event->roomId=$request['roomsId'];
         $event->userId=Auth::user()->id;
         $event->url='event';
+        $event->organisationId=Auth::user()->organisationId;
+        $event->commentaire=$request['comment'];
         $event->save();
         $event->booking()->sync($bookingid);
         $event->type()->sync($request['typeEventsId']);
+
         \Session::flash('success','Event added successfully');
+        $users=DB::select('call get_user_has_pemission_validate_event()');
+        foreach ($users as $user){
+            $userNotify=User::find($user->id);
+
+            $userNotify->notify(new RentalRequest($event));
+        }
+
         return Redirect::to('/location/'.$request{'roomsId'});
 
     }

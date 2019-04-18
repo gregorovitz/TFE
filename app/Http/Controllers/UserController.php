@@ -25,14 +25,23 @@ class UserController extends Controller
         return view('user.view',compact('data','id'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
-    public function edit(User $user)
+    public function editRole( $id)
     {
-        $settings=User::all();
+        $user=User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
+        return view('user.edit_role',compact('user','roles','userRole'));
+    }
+    public function edit(User $user)
+    {
+//        $settings=User::all();
+//        $roles = Role::pluck('name','name')->all();
+//        $userRole = $user->roles->pluck('name','name')->all();
         $cities=Cities::pluck('name','cityId');
         $organisation=Organisation::pluck('name','id');
-        return view('user.edit',compact('user','roles','userRole','cities','organisation'));
+//        return view('user.edit',compact('user','roles','userRole','cities','organisation'));
+        return view('user.edit',compact('user','cities','organisation'));
+
     }
     /**
      * Get a validator for an incoming registration request.
@@ -56,6 +65,26 @@ class UserController extends Controller
     public function getHome(){
         return view('/');
     }
+    public function updateRole(Request $request,$id){
+        $input = $request->all();
+        $user = User::find($id);
+        if (!isset($input['function'])) {
+
+        } else {
+            $function = $input['function'];
+        }
+        if (isset($function)) {
+
+            DB::table('model_has_roles')->where('model_id', $id)->delete();
+            $user->assignRole($function);
+        }
+
+        return redirect()->route('user.index')
+            ->with('success', __('messages.user.update'));
+
+
+    }
+
     public function update(updateUserRequest $request, $id)
 
     {
@@ -92,11 +121,7 @@ class UserController extends Controller
             $email = $input['email'];
         }
         $user->email = $email;
-        if (!isset($input['function'])) {
 
-        } else {
-            $function = $input['function'];
-        }
         if (!isset($input['street'])) {
             $street = $user->street;
         } else {
@@ -135,18 +160,31 @@ class UserController extends Controller
         else {
             $password=$user->password;
         }
+       /* if (!isset($input['organisationId'])) {
+            if (isset ($input['organisationAdd'])) {
+                $organisation = Organisation::create(['name' => $input['organisationAdd']]);
+                $organisationId = $organisation->id;
+                echo $organisationId;die();
+            }else{
+            $organisationId= $user->organisationId;
+            }
+        } else {
+            $organisationId =$input['organisationId'];
+        }*/
+        if (isset ($input['organisationAdd'])) {
+            $organisation = Organisation::create(['name' => $input['organisationAdd']]);
+            $organisationId = $organisation->id;
+        }elseif (!isset($input['organisationId'])) {
+            $organisationId= $user->organisationId;
+        }
+        else {
+        $organisationId =$input['organisationId'];
+        }
 
-        $user->organisationId=$input['organisationId'];
+        $user->organisationId=$organisationId;
         $user->password=$password;
         $user->updated_at=now();
         $user->save();
-
-
-      if (isset($function)) {
-
-          DB::table('model_has_roles')->where('model_id', $id)->delete();
-          $user->assignRole($function);
-      }
 
         return redirect()->route('home')
             ->with('success', __('messages.user.update'));

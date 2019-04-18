@@ -128,28 +128,31 @@ return [
             'can'         =>'permission-list',
         ],
         [
-            'text'    => 'app.Booking',
-            'icon'    => 'share',
-            'can'   =>'display-calendar',
-            'submenu' => [
-
-                [
-                    'text'=>'grande salle',
-                    'url'=>'location/2',
-                    'icon'=>'calendar',
-                ],
-                [
-                    'text'=>'salle 2',
-                    'url'=>'location/3',
-                    'icon'=>'calendar',
-                ],
-            ]
-        ],
-        [
-            'text'        => 'app.Activities',
-            'url'         => '/eventInterne',
+            'text'        => 'app.events',
+            'url'         => '/event',
             'icon'        => 'database',
             'can'         =>'show-event-interne',
+        ],
+        [
+            'text'        => 'app.room',
+            'url'         => '/room',
+            'icon'        => 'suitcase',
+            'can'         =>'show-room',
+
+        ],
+        [
+            'text'        => 'app.typeEvent',
+            'url'         => '/typeEvent',
+            'icon'        => 'suitcase',
+            'can'         =>'show-typeEvent',
+
+        ],
+        [
+            'text'        => 'app.organisation',
+            'url'         => '/organisation',
+            'icon'        => 'suitcase',
+            'can'         =>'show-organisation',
+
         ],
         /*[
             'text'=>'interne',
@@ -185,59 +188,7 @@ return [
 //            'icon' => 'lock',
 //            'can'=>'disabled',
 //        ],
-//        [
-//            'can'=>'disabled',
-//            'text'    => 'Multilevel',
-//            'icon'    => 'share',
-//            'submenu' => [
-//                [
-//                    'text' => 'Level One',
-//                    'url'  => '#',
-//                ],
-//                [
-//                    'text'    => 'Level One',
-//                    'url'     => '#',
-//                    'submenu' => [
-//                        [
-//                            'text' => 'Level Two',
-//                            'url'  => '#',
-//                        ],
-//                        [
-//                            'text'    => 'Level Two',
-//                            'url'     => '#',
-//                            'submenu' => [
-//                                [
-//                                    'text' => 'Level Three',
-//                                    'url'  => '#',
-//                                ],
-//                                [
-//                                    'text' => 'Level Three',
-//                                    'url'  => '#',
-//                                ],
-//                            ],
-//                        ],
-//                    ],
-//                ],
-//                [
-//                    'text' => 'Level One',
-//                    'url'  => '#',
-//                ],
-//            ],
-//        ],
-//        'can'=>'disabled',
-//        'LABELS',
-//        [
-//            'text'       => 'Important',
-//            'icon_color' => 'red',
-//        ],
-//        [
-//            'text'       => 'Warning',
-//            'icon_color' => 'yellow',
-//        ],
-//        [
-//            'text'       => 'Information',
-//            'icon_color' => 'aqua',
-//        ],
+//
     ],
 
     /*

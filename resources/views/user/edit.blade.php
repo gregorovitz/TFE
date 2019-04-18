@@ -95,6 +95,16 @@
                 </span>
             @endif
             </div>
+            <div class="form-group has-feedback {{ $errors->has('organisationAdd') ? 'has-error' : '' }}">
+                <input type="text" name="organisationAdd" class="form-control"
+                placeholder="{{ trans('app.organisationAdd') }}">
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                @if ($errors->has('organisationAdd'))
+                    <span class="help-block">
+                            <strong>{{ $errors->first('organisationAdd') }}</strong>
+                        </span>
+                @endif
+            </div>
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <input type="email" name="email" class="form-control" value="{{ $user->email }}"
@@ -131,7 +141,7 @@
             @endif
 
         @endif
-        @if(auth()->user()->can('user-change-role'))
+        {{--@if(auth()->user()->can('user-change-role'))
             <div class="form-group row">
                 <label for="function" class="col-sm-2 col-form-label ">@lang('app.roles')</label>
                 <div class="col-md-10">
@@ -143,7 +153,7 @@
                     @endif
                 </div>
             </div>
-        @endif
+        @endif--}}
             @component('component.button')
                 @lang('app.save')
             @endcomponent
