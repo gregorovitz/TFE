@@ -34,8 +34,8 @@ class updateUserRequest extends FormRequest
             'streetNum'=>['string'],
             'boxNum'=>['sometimes','nullable','string'],
             'cityId'=>['integer'],
-            'organisationId'=>['required_without:organisationAdd','integer','min:2'],
-            'organisationAdd'=>['sometimes','nullable','string','max:255']
+//            'organisationId'=>['required_without:organisationAdd','integer','min:2'],
+//            'organisationAdd'=>['sometimes','nullable','string','max:255']
         ];
     }
 }

@@ -33,7 +33,7 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('typeEventsId');
             $table->unsignedInteger('userId');
             $table->unsignedInteger('bookingId');
-            $table->string('color')->default('orange');
+            $table->string('color')->default('yellow');
             $table->foreign('roomId')
                 ->references('id')
                 ->on ('rooms');

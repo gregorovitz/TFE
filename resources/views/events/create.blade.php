@@ -54,11 +54,41 @@
             </div>
         </div>
         {{--</div>--}}
-        <div class="form-group">
+        {{--<div class="form-group">
             {!! Form::label('typeEventsId',__('app.event_type')) !!}
             <div class="">
-                {!! Form::select('typeEventsId',$typesEvents, null,['class'=>"form-control"] ) !!}
+                {!! Form::select('typeEvents',$typesEvents, null,['class'=>"form-control"] ) !!}
                 {!! $errors->first('typeEventsId','<p class="alert alert-danger">:message</p>') !!}
+            </div>
+        </div>--}}
+
+        <div class="form-group">
+            {!! Form::label('organisationId',__('app.organisation')) !!}
+            <div class="">
+                {!! Form::select('organisationId',$organisation,['class'=>"form-control"] ) !!}
+                {!! $errors->first('organisationId','<p class="alert alert-danger">:message</p>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('typepeople',__('app.typepeople')) !!}
+            <div class="">
+                {!! Form::select('typepeople',['privé','public','uniquement un type de public (à préciser)'],['class'=>"form-control"] ) !!}
+                {!! $errors->first('typepeople','<p class="alert alert-danger">:message</p>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('otherTypePeople',__('app.otherTypePeople')) !!}
+
+            <div class="">
+                {!! Form::text('otherTypePeople',null,['class'=>'form-control']) !!}
+                {!! $errors->first('otherTypePeople','<p class="alert alert-danger">:message</p>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('descriptionEvents',__('app.event_description_form')) !!}
+            <div class="">
+                {!! Form::textarea('descriptionEvents',null,['class'=>"form-control"] ) !!}
+                {!! $errors->first('descriptionEvents','<p class="alert alert-danger">:message</p>') !!}
             </div>
         </div>
 

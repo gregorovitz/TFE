@@ -42,5 +42,7 @@
             });
         });
     </script>--}}
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <script src="/js/yarjadatabase/buttons.server-side.js"></script>
     {!! $dataTable->scripts() !!}
 @endpush

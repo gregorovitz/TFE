@@ -12,6 +12,10 @@ class Roomcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $rooms = Room::orderBy('id','DESC')->paginate(5);

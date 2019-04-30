@@ -87,15 +87,15 @@
                         </span>
                 @endif
             </div>
-            <div class="form-group has-feedback {{ $errors->has('organisationId') ? 'has-error' : '' }}">
+           {{-- <div class="form-group has-feedback {{ $errors->has('organisationId') ? 'has-error' : '' }}">
             {!! Form::select('organisationId',$organisation, $user->organisation->id,['class'=>"form-control"] ) !!}
             @if ($errors->has('organisationId'))
                 <span class="help-block">
                             <strong>{{ $errors->first('organisationId') }}</strong>
                 </span>
             @endif
-            </div>
-            <div class="form-group has-feedback {{ $errors->has('organisationAdd') ? 'has-error' : '' }}">
+            </div>--}}
+           {{-- <div class="form-group has-feedback {{ $errors->has('organisationAdd') ? 'has-error' : '' }}">
                 <input type="text" name="organisationAdd" class="form-control"
                 placeholder="{{ trans('app.organisationAdd') }}">
                 <span class="glyphicon glyphicon-home form-control-feedback"></span>
@@ -104,7 +104,7 @@
                             <strong>{{ $errors->first('organisationAdd') }}</strong>
                         </span>
                 @endif
-            </div>
+            </div>--}}
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <input type="email" name="email" class="form-control" value="{{ $user->email }}"

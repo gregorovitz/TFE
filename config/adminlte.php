@@ -140,13 +140,13 @@ return [
             'can'         =>'show-room',
 
         ],
-        [
-            'text'        => 'app.typeEvent',
-            'url'         => '/typeEvent',
-            'icon'        => 'suitcase',
-            'can'         =>'show-typeEvent',
-
-        ],
+//        [
+//            'text'        => 'app.typeEvent',
+//            'url'         => '/typeEvent',
+//            'icon'        => 'suitcase',
+//            'can'         =>'show-typeEvent',
+//
+//        ],
         [
             'text'        => 'app.organisation',
             'url'         => '/organisation',

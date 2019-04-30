@@ -11,20 +11,24 @@ use PhpOffice\PhpWord\SimpleType\TblWidth;
 
 class contractPrintLocation extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function show($id){
         // Template processor instance creation
         $event=Events::findOrFail($id);
-        $types='';
-        foreach ($event->type as $type){
-            $types.=$type->name;
-        }
+        $types=$event->description;
+//        foreach ($event->type as $type){
+//            $types.=$type->name;
+//        }
         //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('Template.docx'));
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('contrat location.docx'));
         $name = new TextRun();
         $name->addText($event->user->name.' '.$event->user->firstname, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('name', $name);
         $organisation = new TextRun();
-        $organisation->addText($event->user->organisation->name, array('bold' => true,  'color' => 'black'));
+        $organisation->addText($event->organisation->name, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('Organisation', $organisation);
         $Adresse = new TextRun();
         $Adresse->addText($event->user->street.' '.$event->user->streetNum.' - '.$event->user->city->zipCode.' '.$event->user->city->name, array('bold' => true,  'color' => 'black'));

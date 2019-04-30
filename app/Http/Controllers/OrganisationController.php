@@ -12,6 +12,10 @@ class OrganisationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $organisations = Organisation::orderBy('id','DESC')->paginate(5);

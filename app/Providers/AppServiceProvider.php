@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
                 'text'    => 'app.Booking',
                 'icon'    => 'share',
-                'can'   =>'display-calendar',
+//                'can'   =>'display-calendar',
                 'submenu' =>$submenu
                  ]);
 

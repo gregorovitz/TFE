@@ -93,6 +93,7 @@
                                                 </li>
                                                 <li class="dropdown user user-menu">
                                                     <a href="#"class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="visible-xs fa fa-fw fa-user-circle"> </span>
                                                         <span class="hidden-xs">{{Auth::user()->name}} {{Auth::user()->firstname}}</span>
                                                     </a>
                                                     <ul class="dropdown-menu">

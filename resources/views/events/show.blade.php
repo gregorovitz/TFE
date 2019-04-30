@@ -108,15 +108,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p> @lang('app.event_type') </p>
+                        <p> @lang('app.description') </p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="type">@if(!empty($event->type))
-                                @foreach($event->type as $v)
-
-                                    {!! $v->name !!}
-                                @endforeach
-                            @endif</p>
+                        <p id="type">{{$event->description}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -146,6 +141,11 @@
     @endcan
     @can('validate-event')
     <a href='{{ route('event.validate',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
+    @endcan
+    @can('payment-validation-event')
+        @if($event->validate==1)
+            <a href='{{ route('event.payement',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.payement')</a>
+        @endif
     @endcan
     @can('edit-event')
     <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.edit')</a>

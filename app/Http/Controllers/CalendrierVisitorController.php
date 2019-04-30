@@ -7,6 +7,7 @@ use App\Room;
 use Illuminate\Support\Facades\Auth;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Events;
+
 class CalendrierVisitorController extends Controller
 {
     public function show($room){
@@ -16,7 +17,7 @@ class CalendrierVisitorController extends Controller
 
                 $room = 2;
                 $events = Events::where('roomId', $room)->get();
-                echo('salut');
+
 
         }else{
             $events=Events::where('roomId',$room)->get();
@@ -44,7 +45,17 @@ class CalendrierVisitorController extends Controller
                     $idEvent=$event->interne->id;
 
                 }*/
-                $name=$event->name;
+                if ((Auth::guest() )or (Auth::user()->cannot('display-intern-calendar'))){
+                    if ($event->validate==1){
+                        $name='Loué';
+                    }else{
+                        $name='en option';
+
+                    }
+                }
+                elseif (Auth::user()->can('display-intern-calendar')){
+                $name = $event->name;
+                }
                 $color=$event->color;
                 $idEvent=$event->id;
 

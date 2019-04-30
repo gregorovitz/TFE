@@ -18,7 +18,7 @@
 @section('foreach')
 
     @foreach ($organisations as $key => $organisation)
-        @if ($organisation->id !=1)
+
         <tr>
 
             <td>{{ $organisation->name }}</td>
@@ -28,7 +28,7 @@
 
             </td>
         </tr>
-        @endif
+
     @endforeach
 @endsection
 {!! $organisations->render() !!}

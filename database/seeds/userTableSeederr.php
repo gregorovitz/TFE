@@ -32,7 +32,7 @@ class userTableSeederr extends Seeder
         $user->name = 'Marquebreucq';
         $user->email ='emanumarque@gmail.com';
         $user->password = Hash::make('Gregorovitz201');
-        $user->firstname='Emmanuel';
+        $user->firstname='manu';
         $user->assignRole('visitor');
         $user->street='avenue des combattants';
         $user->streetNum='60';
@@ -41,5 +41,18 @@ class userTableSeederr extends Seeder
 
         $user->save();
 
+        $user->save();
+        $user=new User;
+        $user->name = 'Marque-breucq';
+        $user->email ='e.marquebreucq@students.ephec.be';
+        $user->password = Hash::make('Gregorovitz201');
+        $user->firstname='Emma';
+        $user->assignRole('gestionnaire de salle');
+        $user->street='avenue des combattants';
+        $user->streetNum='60';
+        $user->phone='0476983038';
+        $user->cityId=482;
+
+        $user->save();
     }
 }

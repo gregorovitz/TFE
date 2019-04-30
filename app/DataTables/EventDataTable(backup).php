@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Events;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Facades\DB;
 
 class EventDataTable extends DataTable
 {
@@ -15,67 +14,24 @@ class EventDataTable extends DataTable
      * @return \Yajra\DataTables\DataTableAbstract
      */
     protected $exportColumns = [
-        'id',
-        'numPeopleExp',
-        'name',
-        'start_date',
-        'end_date',
-        'startime',
-        'endtime',
-        'Namerooms',
-        'organisation',
-        'locataire',
-        'validate',
-        'commentaire',
-        'created_at',
-        'updated_at',
+        'id', 'numPeopleExp','name','start_date','end_date','startime','endtime','roomId','userId','validate','commentaire', 'created_at', 'updated_at'
     ];
     public function dataTable($query)
     {
         return datatables($query)
             ->setRowAttr(['align'=>'center'])
-            ->addColumn('action', 'eventdatatable.action')
-            ->filterColumn('Namerooms', function($query, $keyword) {
-                 $sql = "rooms.name like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-            ->filterColumn('organisation', function($query, $keyword) {
-                $sql = "organisations.name like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-            ->filterColumn('locataire',function($query,$keyword){
-                $sql="CONCAT(users.firstname,' ',users.name) like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-    });
-
+            ->addColumn('action', 'eventdatatable.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Events $model
+     * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(Events $model)
     {
-        return DB::table('events')
-            ->join('users','events.userId','=','users.id')
-            ->join('rooms','events.roomId','=','rooms.id')
-            ->join('organisations','events.organisationId','=','organisations.id')
-            ->select(['events.id',
-        'events.numPeopleExp',
-        'events.name',
-        'events.start_date',
-        'events.end_date',
-        'events.startime',
-        'events.endtime',
-        'rooms.name as Namerooms',
-        'organisations.name as organisation',
-         DB::raw("CONCAT(users.firstname,' ',users.name) as locataire"),
-        'events.validate',
-        'events.commentaire',
-        'events.created_at',
-        'events.updated_at']);
+        return $model->newQuery()->select('id', 'numPeopleExp','name','start_date','end_date','startime','endtime','roomId','userId','validate','commentaire', 'created_at', 'updated_at');
     }
 
     /**
@@ -117,7 +73,6 @@ class EventDataTable extends DataTable
     protected function getColumns()
     {
         return [
-
             'id',
             'numPeopleExp',
             'name',
@@ -125,9 +80,8 @@ class EventDataTable extends DataTable
             'end_date',
             'startime',
             'endtime',
-            'Namerooms',
-            'organisation',
-            'locataire',
+            'roomId',
+            'userId',
             'validate',
             'commentaire',
             'created_at',

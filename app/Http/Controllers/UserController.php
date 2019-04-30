@@ -38,7 +38,7 @@ class UserController extends Controller
 //        $roles = Role::pluck('name','name')->all();
 //        $userRole = $user->roles->pluck('name','name')->all();
         $cities=Cities::pluck('name','cityId');
-        $organisation=Organisation::pluck('name','id');
+//        $organisation=Organisation::pluck('name','id');
 //        return view('user.edit',compact('user','roles','userRole','cities','organisation'));
         return view('user.edit',compact('user','cities','organisation'));
 
@@ -171,7 +171,7 @@ class UserController extends Controller
         } else {
             $organisationId =$input['organisationId'];
         }*/
-        if (isset ($input['organisationAdd'])) {
+       /* if (isset ($input['organisationAdd'])) {
             $organisation = Organisation::create(['name' => $input['organisationAdd']]);
             $organisationId = $organisation->id;
         }elseif (!isset($input['organisationId'])) {
@@ -181,7 +181,7 @@ class UserController extends Controller
         $organisationId =$input['organisationId'];
         }
 
-        $user->organisationId=$organisationId;
+        $user->organisationId=$organisationId; //dernière version*/
         $user->password=$password;
         $user->updated_at=now();
         $user->save();

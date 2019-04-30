@@ -20,13 +20,7 @@ class UpdateUserAndOrganisation extends Migration
                 ->on ('organisations');
         });
         Schema::dropIfExists('organisation_has_user');
-        Schema::dropIfExists('organisation_has_type');
-        Schema::table('organisations',function($table){
-            $table->unsignedInteger('typeOrganisationId')->default=(1);
-            $table->foreign('typeOrganisationId')
-                ->references('id')
-                ->on ('typeorganisations');
-        });
+
 
     }
 
@@ -40,10 +34,6 @@ class UpdateUserAndOrganisation extends Migration
         Schema::table('users',function(Blueprint $table){
             $table->dropForeign('users_organisationid_foreign');
             $table->dropColumn('organisationId');
-        });
-        Schema::table('organisations',function(Blueprint $table){
-            $table->dropForeign('organisations_typeorganisationid_foreign');
-            $table->dropColumn('typeOrganisationId');
         });
     }
 }
