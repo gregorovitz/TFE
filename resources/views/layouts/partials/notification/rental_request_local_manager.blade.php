@@ -10,5 +10,5 @@
 {{--{{$notification->data['user']['name'].' '.$notification->data['user']['firstname']}} a fait une demande de location--}}
 {{--</a>--}}
 <a href="/markAsRead/{{$notification->id}}/{{$notification->data['event']['id']}}">
-    {{$notification->data['user']['name'].' '.$notification->data['user']['firstname']}} a fait une demande de location
+    {{$notification->data['event']['name'].' '.$notification->data['locataire']['firstname']}} a fait une demande de location
 </a>

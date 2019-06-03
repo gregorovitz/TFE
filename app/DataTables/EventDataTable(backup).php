@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DataTables;
-
+use Illuminate\Support\Facades\DB;
 use App\Events;
 use Yajra\DataTables\Services\DataTable;
 
@@ -14,24 +14,83 @@ class EventDataTable extends DataTable
      * @return \Yajra\DataTables\DataTableAbstract
      */
     protected $exportColumns = [
-        'id', 'numPeopleExp','name','start_date','end_date','startime','endtime','roomId','userId','validate','commentaire', 'created_at', 'updated_at'
+        'id',
+        'numPeopleExp',
+        'name',
+        'start_date',
+        'end_date',
+        'startime',
+        'endtime',
+        'Namerooms',
+        'organisation',
+        'validate',
+        'payement',
+        'publicTypes',
+        'commentaire',
+        'created_at',
+        'updated_at',
     ];
     public function dataTable($query)
     {
         return datatables($query)
             ->setRowAttr(['align'=>'center'])
-            ->addColumn('action', 'eventdatatable.action');
+//            ->addColumn('action', 'eventdatatable.action')
+            ->filterColumn('Namerooms', function($query, $keyword) {
+                $sql = "rooms.name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('organisation', function($query, $keyword) {
+                $sql = "organisations.name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->editColumn('payement',function($query){
+                if($query->payement == 0){
+                    return "<div class='alert alert-danger'>".$query->payement."</div>";
+                }
+                else{
+                    return "<div class='alert alert-success'>".$query->payement."</div>";
+                }
+            })
+            ->editColumn('validate',function($query){
+                if($query->validate == 0){
+                    return "<div class='alert alert-danger'>".$query->validate."</div>";
+                }
+                else{
+                    return "<div class='alert alert-success'>".$query->validate."</div>";
+                }
+            })
+            ->rawColumns (['payement','validate'])
+            ;
+
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\User $model
+     * @param \App\Events $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Events $model)
+    public function query()
     {
-        return $model->newQuery()->select('id', 'numPeopleExp','name','start_date','end_date','startime','endtime','roomId','userId','validate','commentaire', 'created_at', 'updated_at');
+        return DB::table('events')
+            ->join('users','events.userId','=','users.id')
+            ->join('rooms','events.roomId','=','rooms.id')
+            ->join('organisations','events.organisationId','=','organisations.id')
+            ->select(['events.id',
+                'events.numPeopleExp',
+                'events.name',
+                'events.start_date',
+                'events.end_date',
+                'events.startime',
+                'events.endtime',
+                'rooms.name as Namerooms',
+                'organisations.name as organisation',
+                'events.validate',
+                'events.payement',
+                'events.publicTypes',
+                'events.commentaire',
+                'events.created_at',
+                'events.updated_at']);
     }
 
     /**
@@ -42,11 +101,11 @@ class EventDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
-                    ->parameters([
-                        'initComplete'=>"function(){
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->addAction(['width' => '80px'])
+            ->parameters([
+                'initComplete'=>"function(){
                             this.api().columns().every(function(){
                                 var column=this;
                                 var input=document.createElement(\"input\");
@@ -57,12 +116,12 @@ class EventDataTable extends DataTable
                             });
                         }",
 
-                        'scrollX'=>'true',
-                        'dom'=>'Bfrtip',
-                        'buttons'=>['excel']
+                'scrollX'=>'true',
+                'dom'=>'Bfrtip',
+                'buttons'=>['excel']
 //                        'autoWidth'=>true
 
-                    ]);
+            ]);
     }
 
     /**
@@ -73,6 +132,7 @@ class EventDataTable extends DataTable
     protected function getColumns()
     {
         return [
+
             'id',
             'numPeopleExp',
             'name',
@@ -80,9 +140,11 @@ class EventDataTable extends DataTable
             'end_date',
             'startime',
             'endtime',
-            'roomId',
-            'userId',
+            'Namerooms',
+            'organisation',
             'validate',
+            'payement',
+            'publicTypes',
             'commentaire',
             'created_at',
             'updated_at',

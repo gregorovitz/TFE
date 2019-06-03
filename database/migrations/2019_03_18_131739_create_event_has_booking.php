@@ -13,7 +13,7 @@ class CreateEventHasBooking extends Migration
      */
     public function up()
     {
-        Schema::create('event_has_booking', function (Blueprint $table) {
+        /*Schema::create('event_has_booking', function (Blueprint $table) {
             $table->unsignedInteger('eventId');
             $table->unsignedInteger('bookingId');
             $table->foreign('eventId')
@@ -24,7 +24,7 @@ class CreateEventHasBooking extends Migration
                 ->on('bookings');
             $table->primary('eventId','bookingId');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -34,6 +34,6 @@ class CreateEventHasBooking extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_has_booking');
+//        Schema::dropIfExists('event_has_booking');
     }
 }

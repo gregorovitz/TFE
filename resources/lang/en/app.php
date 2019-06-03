@@ -25,6 +25,7 @@ return[
     "date"=>"Date :",
     "date_end" => 'End date:',
     'date_start' => "Start date:",
+    'delete'=>'delete',
     'display' => 'show',
     'edit' => 'edit',
     'email' => 'email',

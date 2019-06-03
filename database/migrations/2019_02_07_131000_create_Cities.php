@@ -21,7 +21,6 @@ class CreateCities extends Migration
             $table->string('provinces',200);
         });
     }
-
     /**
      * Reverse the migrations.
      *

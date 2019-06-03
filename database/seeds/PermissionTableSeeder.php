@@ -24,19 +24,19 @@ class PermissionTableSeeder extends Seeder
             'permission-list',
             'permission-create',
             'permission-edit',
-            'display-intern-calendar',
+            //'display-intern-calendar',
             'display-calendar',
             'validate-event',
             'print-event',
             'edit-event',
-            'show-event-interne',
+            //'show-event-interne',
             'show-event',
             'show-room',
             'create-room',
             'edit-room',
-            'show-typeEvent',
-            'create-typeEvent',
-            'edit-typeEvent',
+            //'show-typeEvent',
+            //'create-typeEvent',
+            //'edit-typeEvent',
             'show-organisation',
             'create-organisation',
             'edit-organisation',
@@ -52,6 +52,6 @@ class PermissionTableSeeder extends Seeder
         }
         $role=Role::create(['name'=>'visitor'])->givePermissionTo('user-edit','display-calendar');
         $roleA=Role::create(['name'=>'super-admin'])->givePermissionTo([Permission::all()]);
-        $role=Role::create(['name'=>'gestionnaire de salle'])->givePermissionTo('user-edit','display-intern-calendar','display-calendar','validate-event','print-event','edit-event','show-event-interne','show-event','show-room','create-room','edit-room','show-typeEvent','create-typeEvent','edit-typeEvent','show-organisation','create-organisation','edit-organisation');
+        $role=Role::create(['name'=>'gestionnaire de salle'])->givePermissionTo('user-edit','display-calendar','validate-event','print-event','edit-event','show-event','show-room','create-room','edit-room','show-organisation','create-organisation','edit-organisation');
     }
 }

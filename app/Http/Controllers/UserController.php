@@ -17,6 +17,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:user-list');
+        $this->middleware('permission:user-show',['only'=>'show']);
+        $this->middleware('permission:user-change-role', ['only' => ['editRole','updateRole']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
     public function index(Request $request)
     {

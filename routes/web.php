@@ -35,6 +35,7 @@ Route::resource('/event','EventController')->except('create');
 Route::resource('/print','ContractPrintLocation');
 
 Route::post('/event','EventController@store')->name('event.add');
+Route::get('/payement/{id}','EventController@payementvalidateEvent')->name('event.payement');
 route::get('/validate/{id}','EventController@validateEvent')->name('event.validate');
 route::get('/location/{id}','CalendrierVisitorController@show')->name('location.show');
 
@@ -54,6 +55,6 @@ Route::get('/markAsRead/{id}/{event}',function($id,$event){
     auth()->user()->unReadNotifications->where('id',$id)->markAsRead();
     return redirect('/event/'.$event);
 });
-Route::get('/event',function (EventDataTable $dataTable){
-    return $dataTable->render('events.view');
-});
+//Route::get('/event',function (EventDataTable $dataTable){
+//    return $dataTable->render('events.view');
+//});

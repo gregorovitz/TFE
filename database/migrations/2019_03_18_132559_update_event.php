@@ -14,9 +14,9 @@ class UpdateEvent extends Migration
     public function up()
     {
         Schema::table('events',function($table){
-            $table->dropForeign(['bookingid']);
+//            $table->dropForeign(['bookingid']);
             $table->dropForeign(['typeeventsid']);
-            $table->dropColumn('bookingId');
+//            $table->dropColumn('bookingId');
             $table->dropColumn('typeEventsId');
         });
     }
@@ -30,7 +30,7 @@ class UpdateEvent extends Migration
     {
         Schema::table('events',function($table){
             $table->unsignedInteger('typeEventsId');
-            $table->unsignedInteger('bookingId');
+//            $table->unsignedInteger('bookingId');
 
         });
     }

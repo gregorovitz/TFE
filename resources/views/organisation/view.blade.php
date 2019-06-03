@@ -24,8 +24,10 @@
             <td>{{ $organisation->name }}</td>
             <td>
 
-                    <a  href="{{ route('organisation.edit',[$organisation->id,'lang'=>session('applocale')]) }}"class="btn btn-squared btn-outline-primary"><i class="icmn-pencil" aria-hidden="true"></i>  @lang('app.edit')</a>
-
+                    <a  href="{{ route('organisation.edit',[$organisation->id]) }}"class="btn btn-squared btn-outline-primary"><i class="icmn-pencil" aria-hidden="true"></i>  @lang('app.edit')</a>
+                {!! Form::open(['method' => 'DELETE','route' => ['organisation.destroy', $organisation->id],'style'=>'display:inline']) !!}
+                {!! Form::submit(__('app.remove'), ['class'=>'btn btn-squared btn-outline-danger']) !!}
+                {!! Form::close() !!}
             </td>
         </tr>
 

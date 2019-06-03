@@ -29,7 +29,7 @@ class storeEventRequest extends FormRequest
         $fivedays=$date->addDay(5);
         return [
             'event_name' => 'required',
-            'start_date' => 'required|date|after:'.$fivedays,
+            'start_date' => 'required|date|after_or_equal:'.$fivedays,
             'start_time' => 'required|date_format:H:i|after_or_equal:08:30|before_or_equal:24:00',
             'end_time' => 'required|date_format:H:i|before_or_equal:24:00|after_or_equal:08:30',
             'end_date' => 'required|date|after_or_equal:start_date',

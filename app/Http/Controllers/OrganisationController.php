@@ -15,6 +15,10 @@ class OrganisationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:show-organisation');
+        $this->middleware('permission:create-organisation', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-organisation', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-organisation', ['only' => ['destroy']]);
     }
     public function index()
     {
@@ -32,6 +36,7 @@ class OrganisationController extends Controller
     public function create()
     {
         return view('organisation.create');
+
     }
 
     /**
@@ -92,6 +97,7 @@ class OrganisationController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        Organisation::destroy($id);
+        return redirect()->route('organisation.index');
+        }
 }

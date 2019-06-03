@@ -20,7 +20,8 @@ class CalendrierVisitorController extends Controller
 
 
         }else{
-            $events=Events::where('roomId',$room)->get();
+            $events=Events::where('roomId','=',$room)
+                ->where('end_date','>',now())->get();
         }
         $events_List=[];
 
@@ -127,7 +128,7 @@ class CalendrierVisitorController extends Controller
                     }",*/
                'dayClick'=>"function(date){
                 var date1=date.format('YYYY-MM-DD');
-                var hour=date.format('hh:mm:ss');
+                var hour=date.format('hh:mm');
                 var room=$room;
                window.location.href='/event/'+date1+'/'+hour+'/'+room+'/location';
                }",

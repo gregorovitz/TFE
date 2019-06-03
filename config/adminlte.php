@@ -131,7 +131,7 @@ return [
             'text'        => 'app.events',
             'url'         => '/event',
             'icon'        => 'database',
-            'can'         =>'show-event-interne',
+            'can'         =>'show-event',
         ],
         [
             'text'        => 'app.room',

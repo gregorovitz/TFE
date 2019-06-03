@@ -8,19 +8,21 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RentalRequest extends Notification
+class RentalRequestLocalManager extends Notification
 {
     use Queueable;
 
     protected $event;
+    protected $locataire;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($event)
+    public function __construct($event,$locataire)
     {
         $this->event=$event;
+        $this->locataire=$locataire;
     }
 
     /**
@@ -46,7 +48,7 @@ class RentalRequest extends Notification
         return (new MailMessage)
                     ->subject('nouvelle demande de location')
                     ->greeting('bonjour')
-                    ->line('Il y a une nouvelle demande de location.')
+                    ->line($this->locataire['firstname'].' '.$this->locataire['name'].' a introduit une nouvelle demande de location.')
                     ->action('se connecter', url('/login'));
 
     }
@@ -63,6 +65,7 @@ class RentalRequest extends Notification
         return [
             'event'=>$this->event,
             'user'=>$notifiable,
+            'locataire'=>$this->locataire,
             'repliedTime'=>Carbon::now()
         ];
     }

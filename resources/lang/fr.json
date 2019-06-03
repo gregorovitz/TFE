@@ -3,7 +3,7 @@
 	"role-create":"créer de nouveau rôles",
 	"role-edit":"modifier des rôles existant",
 	"role-delete":"supprimer des rôles",
-	"user-edit" :"modifier les utilisateur",
+	"user-edit" :"modifier son profil",
 	"user-list" : "afficher la liste des utilisateur",
 	"user-change-role":"modifier les roles des utilisateur",
 	"permission-list": "afficher les permission",
@@ -14,6 +14,15 @@
 	"print-event": "imprimer le contrats de location",
 	"edit-event": "modifier les données des demande de location",
 	"show-event-interne": "afficher les données d'une activité interne",
-	"show-event": "afficher les donnée des locations "
-
+	"show-event": "afficher le tableau de recherche filtrable des données des locations ",
+	"show-room": "afficher la page de gestion des salle",
+	"create-room": "créer des nouvelles salles",
+	"edit-room":"modifier les donnes des salles" ,
+	"show-typeEvent":"afficher la page de gestion des types d'évènement",
+	"create-typeEvent":"créer un nouveau type d'évènement",
+	"edit-typeEvent": "modifier un type d'évènement",
+	"show-organisation":"afficher la page de gestion des types d'organisation",
+	"create-organisation":"créer un nouveau types d'organisation",
+	"edit-organisation": "modifier un type d'organisation",
+	"payment-validation-event": "valider le payement des locations"
 }

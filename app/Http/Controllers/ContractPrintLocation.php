@@ -14,7 +14,9 @@ class contractPrintLocation extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:print-event');
     }
+
     public function show($id){
         // Template processor instance creation
         $event=Events::findOrFail($id);

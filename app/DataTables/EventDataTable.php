@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Events;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\DB;
 

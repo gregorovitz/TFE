@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\DataTables\EventDataTable;
+use App\Notifications\RentalRequestLocalManager;
 use App\Notifications\RentalRequest;
 use App\Room;
 use App\Http\Requests\storeEventRequest;
@@ -13,17 +15,21 @@ use App\Booking;
 use App\Organisation;
 class EventController extends Controller
 {
-   /* public function index(){
-        return view('events.view');
-    }
-    public function anyData(){
-        return DataTables::of(Events::query())->make(true);
-    }*/
+
+
     public function __construct()
     {
-       $this->middleware('auth');
+        $this->middleware('auth');
+        $this->middleware('permission:list-event',['only'=>['index']]);
+        $this->middleware('permission:show-event', ['only' => ['show']]);
+        $this->middleware('permission:create-event', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-event', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:validate-event', ['only' => ['validateEvent']]);
+        $this->middleware('permission:payement-validation-event',['only'=>['payementvalidateEvent']]);
     }
-
+    public function index(EventDataTable $dataTable){
+        return $dataTable->render('events.view');
+    }
     public function show($id){
 
         return view('events.show', ['event' => Events::findOrFail($id)]);
@@ -83,11 +89,15 @@ class EventController extends Controller
 //        $event->type()->sync($request['typeEventsId']);
 
         \Session::flash('success','Event added successfully');
+        $userNotify=User::find($event->userId);
+        $userNotify->notify(new RentalRequest($event));
         $users=DB::select('call get_user_has_pemission_validate_event()');
-        foreach ($users as $user){
-            $userNotify=User::find($user->id);
 
-            $userNotify->notify(new RentalRequest($event));
+        foreach ($users as $user){
+            $managerNotify=User::find($user->id);
+
+            $managerNotify->notify(new RentalRequestLocalManager($event,$userNotify));
+
         }
 
         return Redirect::to('/location/'.$request{'roomsId'});

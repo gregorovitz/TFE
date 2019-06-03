@@ -15,6 +15,10 @@ class Roomcontroller extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:show-room');
+        $this->middleware('permission:create-room', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-room', ['only' => ['edit','update']]);
+
     }
     public function index()
     {

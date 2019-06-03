@@ -23,10 +23,12 @@
     <div class ="panel panel-primary">
         <div class="panel-heading">@lang("app.info")</div>
         <div class="panel-body">
+            <p> pour les réservation récurrentes ou pour toute autre question concernant la location de la salle, veuillé contacté Baptiste Mertens</p>
             <p>contact : Baptiste Mertens </p>
             <p>tel:010/479.799</p>
             <p>mail:<a href="mailto:e.marquebreucq@students.ephec.be?subject=Feedback">Baptiste.mertens@placet.be</a> </p>
             <p>adresse:1348 louvain-la-neuve 2 rue des sports</p>
+
         </div>
     </div>
 

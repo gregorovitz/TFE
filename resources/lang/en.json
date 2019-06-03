@@ -14,5 +14,16 @@
 	"print-event": "print rental agreement",
 	"edit-event": "edit rentals data ",
 	"show-event-interne": "show activities data",
-	"show-event": "show rental data "
+	"show-event": "show rental data ",
+	"show-room": "",
+	"create-room": "",
+	"edit-room":"" ,
+	"show-typeEvent":"",
+	"create-typeEvent":"",
+	"edit-typeEvent": "",
+	"show-organisation":"",
+	"create-organisation":"",
+	"edit-organisation": "",
+	"payment-validation-event": ""
+
 }

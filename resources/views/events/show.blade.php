@@ -136,20 +136,22 @@
     </div>
 
     <div class=" row">
-    @can('print-event')
-         <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
-    @endcan
-    @can('validate-event')
-    <a href='{{ route('event.validate',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
-    @endcan
-    @can('payment-validation-event')
-        @if($event->validate==1)
-            <a href='{{ route('event.payement',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.payement')</a>
+        @if($event->validate==0)
+            @can('edit-event')
+                <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.edit')</a>
+            @endcan
+            @can('print-event')
+                 <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
+            @endcan
+            @can('validate-event')
+            <a href='{{ route('event.validate',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
+            @endcan
         @endif
-    @endcan
-    @can('edit-event')
-    <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.edit')</a>
-    @endcan
+        @can('payment-validation-event')
+            @if($event->validate==1 && $event->validate==0)
+                <a href='{{ route('event.payement',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.payement')</a>
+            @endif
+        @endcan
     </div>
     @else
     @lang("app.unauthorize_show")
