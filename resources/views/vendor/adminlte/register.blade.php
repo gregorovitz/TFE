@@ -38,7 +38,55 @@
                         </span>
                     @endif
                 </div>
-                                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+                <div class="form-group has-feedback {{ $errors->has('street') ? 'has-error' : '' }}">
+                    <input type="text" name="street" class="form-control"  value="{{old('street')}} "
+                    placeholder="{{ trans('adminlte::adminlte.street') }}">
+                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                    @if ($errors->has('street'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('street') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('streetNum') ? 'has-error' : '' }}">
+                    <input type="text" name="streetNum" class="form-control" value="{{old('streetNum')}}"
+                    placeholder="{{ trans('adminlte::adminlte.streetNum') }}">
+                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                    @if ($errors->has('streetNum'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('streetNum') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('boxNum') ? 'has-error' : '' }}">
+                    <input type="text" name="boxNum" class="form-control" value="{{ old('boxNum') }}"
+                           placeholder="{{ trans('adminlte::adminlte.box') }}">
+                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                    @if ($errors->has('boxNum'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('boxNum') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('phone') ? 'has-error' : '' }}">
+                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}"
+                    placeholder="{{ trans('adminlte::adminlte.phone') }}">
+                    <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
+                    @if ($errors->has('phone'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('cityId') ? 'has-error' : '' }}">
+                    {!! Form::select('cityId',$cities, null,['class'=>"js-select2 form-control"] ) !!}
+                    @if ($errors->has('cityId'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('cityId') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -83,4 +131,9 @@
 
 @section('adminlte_js')
     @yield('js')
+    <script>
+        $(document).ready(function(){
+            $('.js-select2').select2()
+        })
+    </script>
 @stop

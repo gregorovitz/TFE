@@ -58,6 +58,7 @@ class CalendrierVisitorController extends Controller
                 $name = $event->name;
                 }
                 $color=$event->color;
+
                 $idEvent=$event->id;
 
                 $events_List[]=Calendar::event(
@@ -70,6 +71,8 @@ class CalendrierVisitorController extends Controller
                     // Add color and link on event
 
                     [
+                        'textColor'=>'black',
+                        'borderColor'=>'black',
                         'color' => $color,
                         'url'=>'/'.$event->url.'/'.$idEvent,
                     ]

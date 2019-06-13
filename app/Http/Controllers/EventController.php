@@ -60,13 +60,13 @@ class EventController extends Controller
                 $typepeople=$request['otherTypePeople'];
         }
 
-        $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
-        $booking=new Booking;
-        $booking->name=$nameBooking;
-        $booking->userId=Auth::user()->id;
-        $booking->save();
-        $bookingIds=Booking::where('name','=',$nameBooking)->select('id')->get();
-        $bookingid=$bookingIds[0]->id;
+//        $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
+//        $booking=new Booking;
+//        $booking->name=$nameBooking;
+//        $booking->userId=Auth::user()->id;
+//        $booking->save();
+//        $bookingIds=Booking::where('name','=',$nameBooking)->select('id')->get();
+//        $bookingid=$bookingIds[0]->id;
         //        echo($nameBooking);die();
         $event=new Events;
         $event->validate=0;
@@ -85,7 +85,7 @@ class EventController extends Controller
         $event->organisationId=$request['organisationId'];
         $event->commentaire=$request['comment'];
         $event->save();
-        $event->booking()->sync($bookingid);
+//        $event->booking()->sync($bookingid);
 //        $event->type()->sync($request['typeEventsId']);
 
         \Session::flash('success','Event added successfully');

@@ -16,57 +16,56 @@ class contractPrintLocation extends Controller
         $this->middleware('auth');
         $this->middleware('permission:print-event');
     }
-
     public function show($id){
-        // Template processor instance creation
         $event=Events::findOrFail($id);
-        $types=$event->description;
+        return view('contrat.create',compact('event'));
+    }
+    public function store(Request $request){
+        // Template processor instance creation
+//        $event=Events::findOrFail($id);
+//        $types=$event->description;
 //        foreach ($event->type as $type){
 //            $types.=$type->name;
 //        }
         //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('contrat location.docx'));
         $name = new TextRun();
-        $name->addText($event->user->name.' '.$event->user->firstname, array('bold' => true,  'color' => 'black'));
+        $name->addText($request->name, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('name', $name);
         $organisation = new TextRun();
-        $organisation->addText($event->organisation->name, array('bold' => true,  'color' => 'black'));
+        $organisation->addText($request->organisation, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('Organisation', $organisation);
         $Adresse = new TextRun();
-        $Adresse->addText($event->user->street.' '.$event->user->streetNum.' - '.$event->user->city->zipCode.' '.$event->user->city->name, array('bold' => true,  'color' => 'black'));
+        $Adresse->addText($request->address, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('Adresse', $Adresse);
         $phone = new TextRun();
-        $phone->addText($event->user->phone, array('bold' => true,  'color' => 'black'));
+        $phone->addText($request->phone, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('phone', $phone);
         $mail = new TextRun();
-        $mail->addText($event->user->email, array('bold' => true,  'color' => 'black'));
+        $mail->addText($request->mail, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('mail', $mail);
         $date = new TextRun();
-        if($event->start_date!=$event->end_date){
-            $date->addText($event->start_date.' - '.$event->end_date, array('bold' => true,  'color' => 'black'));
-            $templateProcessor->setComplexValue('date', $date);
-        }else{
-            $date->addText($event->start_date, array('bold' => true,  'color' => 'black'));
-            $templateProcessor->setComplexValue('date', $date);
-        }
+        $date->addText($request->date, array('bold' => true,  'color' => 'black'));
+        $templateProcessor->setComplexValue('date', $date);
+
 
         $horaire = new TextRun();
-        $horaire->addText($event->startime.' - '.$event->endtime, array('bold' => true,  'color' => 'black'));
+        $horaire->addText($request->schedule, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('horaire', $horaire);
         $type = new TextRun();
-        $type->addText($types, array('bold' => true,  'color' => 'black'));
+        $type->addText($request->activity, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('type', $type);
         $people = new TextRun();
-        $people->addText($event->numPeopleExp, array('bold' => true,  'color' => 'black'));
+        $people->addText($request->people, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('people', $people);
         $montant = new TextRun();
-        $montant->addText('150', array('bold' => true,  'color' => 'black'));
+        $montant->addText($request->montant, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('montant', $montant);
         $garantie = new TextRun();
-        $garantie->addText('100 ', array('bold' => true,  'color' => 'black'));
+        $garantie->addText($request->guarantie, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('garantie', $garantie);
         $total = new TextRun();
-        $total->addText(100+150, array('bold' => true,  'color' => 'black'));
+        $total->addText($request->montant+$request->guarantie, array('bold' => true,  'color' => 'black'));
         $templateProcessor->setComplexValue('total', $total);
 
 

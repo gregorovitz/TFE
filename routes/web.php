@@ -34,6 +34,7 @@ Route::resource('/event','EventController')->except('create');
 //Route::resource('/eventInterne','EventInterneController')->except(['create','view']);//except view
 Route::resource('/print','ContractPrintLocation');
 
+
 Route::post('/event','EventController@store')->name('event.add');
 Route::get('/payement/{id}','EventController@payementvalidateEvent')->name('event.payement');
 route::get('/validate/{id}','EventController@validateEvent')->name('event.validate');
