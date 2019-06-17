@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Booking;
 use App\Room;
 use Illuminate\Support\Facades\Auth;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -47,8 +47,12 @@ class CalendrierVisitorController extends Controller
 
                 }*/
                 if ((Auth::guest() )or (Auth::user()->cannot('display-intern-calendar'))){
-                    if ($event->validate==1){
-                        $name='Loué';
+                    $eventHasBooking = booking::where('eventId', $event->id)
+                        ->count();
+                    if ($eventHasBooking){
+                        if ($event->booking->validate==1){
+                            $name='Loué';
+                        }
                     }else{
                         $name='en option';
 

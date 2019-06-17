@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Events;
-use App\TypeEvents;
+use App\Booking;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\Element\field;
 use PhpOffice\PhpWord\Element\Table;
@@ -28,6 +28,11 @@ class contractPrintLocation extends Controller
 //            $types.=$type->name;
 //        }
         //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
+        $booking=new Booking;
+        $booking->eventId=$request['id'];
+        $booking->organisationId=$request['organisationid'];
+        $booking->total=$request['montant']+$request['guarantie'];
+        $booking->save();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('contrat location.docx'));
         $name = new TextRun();
         $name->addText($request->name, array('bold' => true,  'color' => 'black'));

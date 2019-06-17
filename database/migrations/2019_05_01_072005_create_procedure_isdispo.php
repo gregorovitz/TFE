@@ -15,7 +15,7 @@ class CreateProcedureIsdispo extends Migration
     {
         DB::unprepared('CREATE  PROCEDURE isdispo(in start datetime,end datetime,room int)
 BEGIN
-select id from events 
+select e.id from events as e join bookings as b
 	where(
 			(
 				(
@@ -42,7 +42,7 @@ select id from events
             and 
             (roomId=room)
             and
-            (validate=1)
+            (b.validate=1)
        );
 
 END');

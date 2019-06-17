@@ -32,7 +32,7 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('roomId');
             $table->unsignedInteger('typeEventsId');
             $table->unsignedInteger('userId');
-            $table->unsignedInteger('bookingId');
+//            $table->unsignedInteger('bookingId');
             $table->string('color')->default('yellow');
             $table->foreign('roomId')
                 ->references('id')
@@ -43,9 +43,9 @@ class CreateEventsTable extends Migration
             $table->foreign('userId')
                 ->references('id')
                 ->on ('users');
-            $table->foreign('bookingId')
-                ->references('id')
-                ->on ('bookings');
+//            $table->foreign('bookingId')
+//                ->references('id')
+//                ->on ('bookings');
 
         });
 

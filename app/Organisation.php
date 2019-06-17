@@ -13,8 +13,8 @@ class Organisation extends Model
     {
         return $this->hasMany('App\User');
     }
-    public function type()
+    public function booking()
     {
-        return $this->belongsTo('App\TypeOrganisation');
+        return $this->hasMany('App\Booking');
     }
 }

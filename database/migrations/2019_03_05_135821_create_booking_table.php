@@ -15,14 +15,20 @@ class CreateBookingTable extends Migration
     {
         Schema::create('Bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->float('amount')->nullable();
-            $table->float('guarantee')->nullable();
-            $table->unsignedInteger('userId');
+            $table->string('communication')->nullable();
+            $table->float('total')->nullable();
+            $table->unsignedInteger('organisationId');
+            $table->unsignedInteger('eventId');
+            $table->boolean('payement')->default(0);
+            $table->boolean('validate')->default(0);
             $table->timestamps();
-            $table->foreign('userId')
+            $table->foreign('organisationId')
                 ->references('id')
-                ->on('users');
+                ->on('organisations');
+            $table->foreign('eventId')
+                ->references('id')
+                ->on('events');
+
         });
 
 

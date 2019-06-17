@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = [
-        'userId','name','amount', 'guarantee', 'created_at','userid'
+        'communication','total','organisationId', 'eventId', 'created_at','payement','validate'
     ];
     public function events()
     {
-        return $this->belongsToMany('App\Events','event_has_booking','bookingId','eventId');
+        return $this->belongsTo('App\Events');
     }
-    public function user()
+    public function organisation()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Organisation');
     }
 }

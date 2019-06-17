@@ -32,6 +32,8 @@
                     <div class="alert alert-danger">{{Session::get('warning')}}</div>
                 @endif
             </div>
+            {!! Form::hidden('id',$event->id,['class'=>'form-control']) !!}
+            {!! Form::hidden('organisationid',$event->organisationId,['class'=>'form-control']) !!}
             <div class="form-group">
                 {!! Form::label('name',__('contrat.name')) !!}
 

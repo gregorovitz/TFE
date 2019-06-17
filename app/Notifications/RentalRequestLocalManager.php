@@ -2,24 +2,27 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RentalRequest extends Notification implements ShouldQueue
+class RentalRequestLocalManager extends Notification implements ShouldQueue
 {
     use Queueable;
 
     protected $event;
+    protected $locataire;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($event)
+    public function __construct($event,$locataire)
     {
         $this->event=$event;
+        $this->locataire=$locataire;
     }
 
     /**
@@ -30,8 +33,8 @@ class RentalRequest extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-   return ['mail'];
-
+//        return ['mail'];
+        return['mail','database'];
     }
 
     /**
@@ -41,16 +44,32 @@ class RentalRequest extends Notification implements ShouldQueue
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
+    {   $url=secure_url('/event/',[$this->event['id']]);
         return (new MailMessage)
+
             ->subject('nouvelle demande de location')
             ->greeting('bonjour')
-            ->line("merci d'avoir effectué une demande de location")
-            ->line("vous recevrez bientot le contrat de location par mail")
-            ->action('se connecter', url('/login'));
+            ->line($this->locataire['firstname'].' '.$this->locataire['name'].' a introduit une nouvelle demande de location.')
+            ->action('voir', url($url));
 
     }
 
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toDatabase($notifiable)
+    {
+
+        return [
+            'event'=>$this->event,
+            'user'=>$notifiable,
+            'locataire'=>$this->locataire,
+            'repliedTime'=>Carbon::now()
+        ];
+    }
 
 
     /**

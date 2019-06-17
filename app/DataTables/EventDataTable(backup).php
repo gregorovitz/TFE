@@ -43,6 +43,7 @@ class EventDataTable extends DataTable
                 $sql = "organisations.name like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+
             ->editColumn('payement',function($query){
                 if($query->payement == 0){
                     return "<div class='alert alert-danger'>".$query->payement."</div>";
@@ -59,7 +60,16 @@ class EventDataTable extends DataTable
                     return "<div class='alert alert-success'>".$query->validate."</div>";
                 }
             })
+            ->filterColumn('validate', function($query, $keyword) {
+                $sql = "bookings.validate like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('payement', function($query, $keyword) {
+                $sql = "bookings.payement like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->rawColumns (['payement','validate'])
+
             ;
 
     }
@@ -76,6 +86,7 @@ class EventDataTable extends DataTable
             ->join('users','events.userId','=','users.id')
             ->join('rooms','events.roomId','=','rooms.id')
             ->join('organisations','events.organisationId','=','organisations.id')
+            ->join('bookings','events.id','=','bookings.eventId')
             ->select(['events.id',
                 'events.numPeopleExp',
                 'events.name',
@@ -85,8 +96,8 @@ class EventDataTable extends DataTable
                 'events.endtime',
                 'rooms.name as Namerooms',
                 'organisations.name as organisation',
-                'events.validate',
-                'events.payement',
+                'bookings.validate',
+                'bookings.payement',
                 'events.publicTypes',
                 'events.commentaire',
                 'events.created_at',

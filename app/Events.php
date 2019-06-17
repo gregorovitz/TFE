@@ -11,26 +11,27 @@ class Events extends Model
     ];
     public function booking()
     {
-        return $this->belongsToMany('App\Booking','event_has_booking','eventID','bookingId');
+        return $this->hasOne('App\Booking','id');
     }
     public function room()
     {
         return $this->belongsTo('App\Room','roomId');
     }
-    public function type()
-    {
-        return $this ->belongsToMany('App\TypeEvents','event_has_type','eventId','typeId');
-    }
+//    public function type()
+//    {
+//        return $this ->belongsToMany('App\TypeEvents','event_has_type','eventId','typeId');
+//    }
     public function user()
     {
         return $this->belongsTo('App\User','userId');
     }
-    public function interne()
-    {
-        return $this->hasOne('App\EventIntern','eventId');
-    }
+//    public function interne()
+//    {
+//        return $this->hasOne('App\EventIntern','eventId');
+//    }
     public function organisation()
     {
         return $this->belongsTo('App\Organisation','organisationId');
     }
+
 }

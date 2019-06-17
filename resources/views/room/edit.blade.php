@@ -33,12 +33,12 @@
     @endif
 
 
-    {!! Form::model($room, ['method' => 'PATCH','route' => ['room.update', $room->id]]) !!}
+    {!! Form::open( ['method' => 'PATCH','route' => ['room.update', $room->id]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>@lang('app.name'):</strong>
-                {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                {!! Form::text('name', $room->name, array('placeholder' => 'Name','class' => 'form-control')) !!}
             </div>
         </div>
 

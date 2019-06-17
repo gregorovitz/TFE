@@ -5,7 +5,7 @@
  * Date: 12/03/2019
  * Time: 13:13
  */
-
+echo$eventHasBooking;
 ?>
 @extends('adminlte::page')
 @section('title', 'appCentrePlacet')
@@ -136,25 +136,105 @@
     </div>
 
     <div class=" row">
-        @if($event->validate==0)
-            @can('edit-event')
-                <a href='#' class="btn btn-squared btn-outline-warning">@lang('app.edit')</a>
-            @endcan
+
+        @if(!$eventHasBooking)
             @can('print-event')
                  <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
             @endcan
+
+        @elseif($event->booking->validate==0)
             @can('validate-event')
-            <a href='{{ route('event.validate',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.validate')</a>
+                    <a href="#" class="btn  btn-squared btn-outline-warnin" id="commuModal">@lang('app.validate')</a>
+
+            @endcan
+        @elseif($event->booking->validate==1 && $event->booking->payement==0)
+
+            @can('payment-validation-event')
+
+                    <a href='{{ route('event.payement',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.payement')</a>
+
             @endcan
         @endif
-        @can('payment-validation-event')
-            @if($event->validate==1 && $event->validate==0)
-                <a href='{{ route('event.payement',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.payement')</a>
-            @endif
-        @endcan
     </div>
     @else
     @lang("app.unauthorize_show")
     @endcan
     @endauth
+    <!-- Modal -->
+    <div class="modal fade" id="communication-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Communication</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formRegister" class="form-horizontal" role="form" method="POST" action="{{ url('/validate/'.$event->id) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="communication">
+                                <small class="help-block"></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="hidden" class="form-control" name="total" value=>
+                                <small class="help-block"></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    @lang('app.save')
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
+@push('js')
+    <script>
+        $(function(){
+            $("#commuModal").click(function(){
+                $('#communication-modal').modal();
+
+            });
+            $(document).on('submit', '#commuForm', function(e) {
+                e.preventDefault();
+
+                $('input+small').text('');
+                $('input').parent().removeClass('has-error');
+
+                $.ajax({
+                    method: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: "json"
+                })
+                    .done(function(data) {
+                        $('.alert-success').removeClass('hidden');
+                        $('#myModal').modal('hide');
+                    })
+                    .fail(function(data) {
+                        $.each(data.responseJSON, function (key, value) {
+                            var input = '#commuForm input[name=' + key + ']';
+                            $(input + '+small').text(value);
+                            $(input).parent().addClass('has-error');
+                        });
+                    });
+            });
+
+        })
+
+    </script>
+
+
+@endpush

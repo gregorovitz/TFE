@@ -54,5 +54,20 @@ class userTableSeederr extends Seeder
         $user->cityId=482;
 
         $user->save();
+
+        $user=new User;
+        $user->name = 'marque';
+        $user->email ='manumarquebreucq@ymail.com';
+        $user->password = Hash::make('Gregorovitz201');
+        $user->firstname='manu';
+        $user->assignRole('trésorier');
+        $user->street='avenue des combattants';
+        $user->streetNum='60';
+        $user->phone='0476983038';
+        $user->cityId=482;
+
+        $user->save();
+
     }
+
 }

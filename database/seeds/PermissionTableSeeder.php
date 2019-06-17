@@ -40,8 +40,11 @@ class PermissionTableSeeder extends Seeder
             'show-organisation',
             'create-organisation',
             'edit-organisation',
-            'payment-validation-event'
-
+            'payment-validation-event',
+            'display-intern-calendar',
+            'create-event',
+            'list-event',
+            'user-show'
 
 
         ];
@@ -50,8 +53,9 @@ class PermissionTableSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-        $role=Role::create(['name'=>'visitor'])->givePermissionTo('user-edit','display-calendar');
-        $roleA=Role::create(['name'=>'super-admin'])->givePermissionTo([Permission::all()]);
-        $role=Role::create(['name'=>'gestionnaire de salle'])->givePermissionTo('user-edit','display-calendar','validate-event','print-event','edit-event','show-event','show-room','create-room','edit-room','show-organisation','create-organisation','edit-organisation');
+        $role=Role::create(['name'=>'visitor'])->givePermissionTo('user-edit','display-calendar','create-event');
+        $roleA=Role::create(['name'=>'Admin'])->givePermissionTo([Permission::all()]);
+        $role=Role::create(['name'=>'gestionnaire de salle'])->givePermissionTo('user-edit','display-calendar','display-intern-calendar','validate-event','print-event','edit-event','show-event','show-room','create-room','edit-room','show-organisation','create-organisation','edit-organisation','create-event');
+        $role=Role::create(['name'=>'trésorier'])->givePermissionTo('user-edit','display-calendar','display-intern-calendar','validate-event','print-event','edit-event','show-event','show-room','create-room','edit-room','show-organisation','create-organisation','edit-organisation','create-event','payment-validation-event');
     }
 }

@@ -7,12 +7,14 @@ use App\Notifications\RentalRequest;
 use App\Room;
 use App\Http\Requests\storeEventRequest;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Events;
 use Illuminate\Support\Facades\Auth;
 use App\Booking;
 use App\Organisation;
+use App\Notifications\RentalRequestTrésorier;
 class EventController extends Controller
 {
 
@@ -25,14 +27,16 @@ class EventController extends Controller
         $this->middleware('permission:create-event', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit-event', ['only' => ['edit', 'update']]);
         $this->middleware('permission:validate-event', ['only' => ['validateEvent']]);
-        $this->middleware('permission:payement-validation-event',['only'=>['payementvalidateEvent']]);
+        $this->middleware('permission:payment-validation-event',['only'=>['payementvalidateEvent']]);
     }
     public function index(EventDataTable $dataTable){
         return $dataTable->render('events.view');
     }
     public function show($id){
-
-        return view('events.show', ['event' => Events::findOrFail($id)]);
+        $eventHasBooking = booking::where('eventId', $id)
+            ->count();
+        $event=Events::findOrFail($id);
+        return view('events.show', compact('event' ,'eventHasBooking'));
     }
     public function store(storeEventRequest $request)
     {
@@ -69,8 +73,8 @@ class EventController extends Controller
 //        $bookingid=$bookingIds[0]->id;
         //        echo($nameBooking);die();
         $event=new Events;
-        $event->validate=0;
-        $event->payement=0;
+//        $event->validate=0;
+//        $event->payement=0;
         $event->name=$request['event_name'];
         $event->numPeopleExp=$request['numPeopleexp'];
         $event->start_date =$request['start_date'];
@@ -91,7 +95,7 @@ class EventController extends Controller
         \Session::flash('success','Event added successfully');
         $userNotify=User::find($event->userId);
         $userNotify->notify(new RentalRequest($event));
-        $users=DB::select('call get_user_has_pemission_validate_event()');
+        $users=DB::select('call get_user_has_Role(\'gestionnaire de salle\')');
 
         foreach ($users as $user){
             $managerNotify=User::find($user->id);
@@ -117,10 +121,11 @@ class EventController extends Controller
 
         return view();
     }
-    public function validateEvent($id)
+    public function validateEvent(Request $request,$id)
     {
+
+
         $event = Events::find($id);
-        $event->validate = 1;
         if ($event->color == 'yellow') {
             $event->color = 'orange';
 //        }elseif($event->color=='blue') {
@@ -128,14 +133,29 @@ class EventController extends Controller
         }
         $event->updated_at = now();
         $event->save();
+        $bookingid=Booking::where('eventId',$id)
+            ->update(['communication'=>$request['communication'],'validate'=>1]);
 
+
+        $booking=Booking::findOrFail($bookingid);
+
+        $users=DB::select('call get_user_has_Role(\'trésorier\')');
+
+        foreach ($users as $user){
+            $managerNotify=User::find($user->id);
+
+            $managerNotify->notify(new RentalRequestTrésorier($event,$booking));
+
+        }
         return redirect()->to('/location/' . $event->roomId)
             ->with('success', __('messages.user.update'));
     }
     public function payementvalidateEvent($id)
     {
+        Booking::where('eventId',$id)
+            ->update(['payement'=>1]);
+
         $event = Events::find($id);
-        $event->payement = 1;
         $event->color = 'green';
 //        }elseif($event->color=='blue') {
 //            $event->color='dark_green';

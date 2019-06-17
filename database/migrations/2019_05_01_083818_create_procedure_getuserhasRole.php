@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProcedureGetuserhaspermissionvalidateevent extends Migration
+class CreateProcedureGetuserhasRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProcedureGetuserhaspermissionvalidateevent extends Migration
      */
     public function up()
     {
-        DB::unprepared("CREATE PROCEDURE get_user_has_pemission_validate_event()
+        DB::unprepared("CREATE PROCEDURE get_user_has_Role(in nameRole varchar(255))
 BEGIN
 SELECT *
 FROM users
@@ -23,14 +23,9 @@ where id in
         from model_has_roles 
         where role_id in
     (
-        select role_id 
-            from role_has_Permissions 
-            where permission_id in
-    (
         select id 
-                from permissions 
-                where name='validate-event'
-                ) 
+            from roles
+			where name=nameRole                 
 			)
 		);
 END");
@@ -43,6 +38,6 @@ END");
      */
     public function down()
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS get_user_has_pemission_validate_event;');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_user_has_Role;');
     }
 }

@@ -33,7 +33,7 @@
     @endif
 
 
-    {!! Form::model($permission, ['method' => 'PATCH','route' => ['permissions.update', $permission->id,'lang'=>session('applocale')]]) !!}
+    {!! Form::open(['method' => 'PATCH','route' => ['permissions.update', $permission->id,'lang'=>session('applocale')]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

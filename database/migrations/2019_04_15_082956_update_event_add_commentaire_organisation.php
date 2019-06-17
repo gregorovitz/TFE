@@ -16,7 +16,6 @@ class UpdateEventAddCommentaireOrganisation extends Migration
         Schema::table('events',function($table){
             $table->unsignedInteger('organisationId');
             $table->string('commentaire')->nullable();
-            $table->boolean('payement');
             $table->foreign('organisationId')
                 ->references('id')
                 ->on ('organisations');
@@ -35,7 +34,6 @@ class UpdateEventAddCommentaireOrganisation extends Migration
             $table->dropForeign(['organisationId']);
             $table->dropColumn('organisationId');
             $table->dropColumn('commentaire');
-            $table->dropColumn('payement');
             $table->dropColumn('publicTypes');
         });
     }
