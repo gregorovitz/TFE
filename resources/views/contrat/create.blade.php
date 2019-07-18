@@ -24,7 +24,8 @@
 
     <div>
         <div>
-            {!! Form::open(['url' => '/print']) !!}
+            {!! Form::open(['method' => 'PATCH','route' => ['print.update', $event->id]]) !!}
+
             <div class ="row">
                 @if (Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
@@ -106,7 +107,7 @@
                 {!! Form::label('people',__('contrat.people')) !!}
 
                 <div class="">
-                    {!! Form::number('people',$event->numPeopleExp,['class'=>'form-control']) !!}
+                    {!! Form::number('people',$event->numMaxPeople,['class'=>'form-control']) !!}
                     {!! $errors->first('people','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
@@ -114,7 +115,9 @@
                 {!! Form::label('montant',__('contrat.montant')) !!}
 
                 <div class="">
+
                     {!! Form::number('montant',null,['class'=>'form-control']) !!}
+
                     {!! $errors->first('montant','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>

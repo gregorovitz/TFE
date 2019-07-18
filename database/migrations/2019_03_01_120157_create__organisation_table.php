@@ -20,17 +20,6 @@ class CreateOrganisationTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('Organisation_has_user', function (Blueprint $table) {
-            $table->unsignedInteger('organisationId');
-            $table->unsignedInteger('userId');
-            $table->foreign('organisationId')
-                ->references('id')
-                ->on('Organisations');
-            $table->foreign('userId')
-                ->references('id')
-                ->on('users');
-            $table->primary(['organisationId','userId']);
-        });
     }
 
     /**
@@ -40,8 +29,6 @@ class CreateOrganisationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organisation_has_user');
         Schema::dropIfExists('organisations');
-
     }
 }

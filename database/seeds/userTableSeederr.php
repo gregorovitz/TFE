@@ -20,7 +20,7 @@ class userTableSeederr extends Seeder
         $user->email ='gregorovitz@outlook.be';
         $user->password = Hash::make('Gregorovitz201');
         $user->firstname='Emmanuel';
-        $user->assignRole('super-admin');
+        $user->assignRole('Admin');
         $user->street='avenue des combattants';
         $user->streetNum='60';
         $user->phone='0476983038';
@@ -64,6 +64,16 @@ class userTableSeederr extends Seeder
         $user->street='avenue des combattants';
         $user->streetNum='60';
         $user->phone='0476983038';
+        $user->cityId=482;
+
+        $user->save();
+
+        $user=new User;
+        $user->name = 'delete';
+        $user->email ='delete@delete.delete';
+        $user->password = Hash::make('D€l€t€');
+        $user->firstname='delete';
+        $user->assignRole('visitor');
         $user->cityId=482;
 
         $user->save();

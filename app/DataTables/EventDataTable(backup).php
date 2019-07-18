@@ -15,7 +15,7 @@ class EventDataTable extends DataTable
      */
     protected $exportColumns = [
         'id',
-        'numPeopleExp',
+        'numMaxPeople',
         'name',
         'start_date',
         'end_date',
@@ -23,7 +23,6 @@ class EventDataTable extends DataTable
         'endtime',
         'Namerooms',
         'organisation',
-        'validate',
         'payement',
         'publicTypes',
         'commentaire',
@@ -44,31 +43,31 @@ class EventDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
 
-            ->editColumn('payement',function($query){
-                if($query->payement == 0){
-                    return "<div class='alert alert-danger'>".$query->payement."</div>";
-                }
-                else{
-                    return "<div class='alert alert-success'>".$query->payement."</div>";
-                }
-            })
-            ->editColumn('validate',function($query){
-                if($query->validate == 0){
-                    return "<div class='alert alert-danger'>".$query->validate."</div>";
-                }
-                else{
-                    return "<div class='alert alert-success'>".$query->validate."</div>";
-                }
-            })
-            ->filterColumn('validate', function($query, $keyword) {
-                $sql = "bookings.validate like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-            ->filterColumn('payement', function($query, $keyword) {
-                $sql = "bookings.payement like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-            ->rawColumns (['payement','validate'])
+//            ->editColumn('status',function($query){
+//                if($query->status == 0){
+//                    return "<div class='alert alert-danger'>".$query->payement."</div>";
+//                }
+//                else{
+//                    return "<div class='alert alert-success'>".$query->payement."</div>";
+//                }
+//            })
+//            ->editColumn('validate',function($query){
+//                if($query->validate == 0){
+//                    return "<div class='alert alert-danger'>".$query->validate."</div>";
+//                }
+//                else{
+//                    return "<div class='alert alert-success'>".$query->validate."</div>";
+//                }
+//            })
+//            ->filterColumn('validate', function($query, $keyword) {
+//                $sql = "bookings.validate like ?";
+//                $query->whereRaw($sql, ["%{$keyword}%"]);
+//            })
+//            ->filterColumn('payement', function($query, $keyword) {
+//                $sql = "bookings.payement like ?";
+//                $query->whereRaw($sql, ["%{$keyword}%"]);
+//            })
+//            ->rawColumns (['payement','validate'])
 
             ;
 
@@ -86,9 +85,8 @@ class EventDataTable extends DataTable
             ->join('users','events.userId','=','users.id')
             ->join('rooms','events.roomId','=','rooms.id')
             ->join('organisations','events.organisationId','=','organisations.id')
-            ->join('bookings','events.id','=','bookings.eventId')
             ->select(['events.id',
-                'events.numPeopleExp',
+                'events.numMaxPeople',
                 'events.name',
                 'events.start_date',
                 'events.end_date',
@@ -96,8 +94,7 @@ class EventDataTable extends DataTable
                 'events.endtime',
                 'rooms.name as Namerooms',
                 'organisations.name as organisation',
-                'bookings.validate',
-                'bookings.payement',
+                'events.status',
                 'events.publicTypes',
                 'events.commentaire',
                 'events.created_at',
@@ -145,7 +142,7 @@ class EventDataTable extends DataTable
         return [
 
             'id',
-            'numPeopleExp',
+            'numMaxPeople',
             'name',
             'start_date',
             'end_date',
@@ -153,8 +150,7 @@ class EventDataTable extends DataTable
             'endtime',
             'Namerooms',
             'organisation',
-            'validate',
-            'payement',
+            'status',
             'publicTypes',
             'commentaire',
             'created_at',

@@ -36,17 +36,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Organisation','organisationId','id');
     }
-    public function Booking()
-    {
-        return $this->hasMany('App\Booking');
-    }
     public function event()
     {
         return $this->hasMany('App\Events');
     }
-    public function interne()
-    {
-        return $this->belongsToMany('App\EventInterne','interne_has_user','userId','interneId');
-    }
+
 
 }

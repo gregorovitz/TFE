@@ -9,12 +9,9 @@ class Organisation extends Model
     protected $fillable = [
         'name'
     ];
-    public function user()
+
+    public function events()
     {
-        return $this->hasMany('App\User');
-    }
-    public function booking()
-    {
-        return $this->hasMany('App\Booking');
+        return $this->hasMany('App\Events');
     }
 }

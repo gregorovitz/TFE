@@ -5,7 +5,7 @@
  * Date: 12/03/2019
  * Time: 13:13
  */
-echo$eventHasBooking;
+
 ?>
 @extends('adminlte::page')
 @section('title', 'appCentrePlacet')
@@ -119,7 +119,7 @@ echo$eventHasBooking;
                         <p> @lang('app.participant_exp')</p>
                     </div>
                     <div class="col-sm-8">
-                        <p id="peopleExp">{{$event->numPeopleExp}}</p>
+                        <p id="peopleExp">{{$event->numMaxPeople}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -134,20 +134,20 @@ echo$eventHasBooking;
             </div>
         </div>
     </div>
-
+        {{$event->status}}
     <div class=" row">
 
-        @if(!$eventHasBooking)
+        @if($event->status=='request')
             @can('print-event')
                  <a href='{{ route('print.show',['id'=>$event->id]) }}' class="btn btn-squared btn-outline-warning">@lang('app.print')</a>
             @endcan
 
-        @elseif($event->booking->validate==0)
+        @elseif($event->status=="signature waiting")
             @can('validate-event')
                     <a href="#" class="btn  btn-squared btn-outline-warnin" id="commuModal">@lang('app.validate')</a>
 
             @endcan
-        @elseif($event->booking->validate==1 && $event->booking->payement==0)
+        @elseif($event->status=="validate")
 
             @can('payment-validation-event')
 

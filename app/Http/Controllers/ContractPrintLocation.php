@@ -20,19 +20,9 @@ class contractPrintLocation extends Controller
         $event=Events::findOrFail($id);
         return view('contrat.create',compact('event'));
     }
-    public function store(Request $request){
-        // Template processor instance creation
-//        $event=Events::findOrFail($id);
-//        $types=$event->description;
-//        foreach ($event->type as $type){
-//            $types.=$type->name;
-//        }
-        //echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
-        $booking=new Booking;
-        $booking->eventId=$request['id'];
-        $booking->organisationId=$request['organisationid'];
-        $booking->total=$request['montant']+$request['guarantie'];
-        $booking->save();
+    public function update(Request $request,$id){
+
+
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('contrat location.docx'));
         $name = new TextRun();
         $name->addText($request->name, array('bold' => true,  'color' => 'black'));
@@ -74,7 +64,10 @@ class contractPrintLocation extends Controller
         $templateProcessor->setComplexValue('total', $total);
 
 
-
+        $event = Events::find($id);
+        $event->tarif=$request['montant']+$request['guarantie'];
+        $event->status='signature waiting';
+        $event->save();
         echo date('H:i:s'), ' Saving the result document...';
         $templateProcessor->saveAs(storage_path('testtemplate.docx'));
 //        $templateProcessor->saveAs("helloWorld.docx");

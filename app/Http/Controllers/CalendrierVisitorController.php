@@ -47,12 +47,11 @@ class CalendrierVisitorController extends Controller
 
                 }*/
                 if ((Auth::guest() )or (Auth::user()->cannot('display-intern-calendar'))){
-                    $eventHasBooking = booking::where('eventId', $event->id)
-                        ->count();
-                    if ($eventHasBooking){
-                        if ($event->booking->validate==1){
+
+
+                    if ($event->status='validate'){
                             $name='Loué';
-                        }
+
                     }else{
                         $name='en option';
 
@@ -115,12 +114,20 @@ class CalendrierVisitorController extends Controller
             $calendar_details=Calendar::addEvents($events_List)->setOptions([
                 'defaultView'=>'agendaWeek',
                 'selectable'=>'true',
-                "businessHours: {
-                // days of week. an array of zero-based day of week integers (0=Sunday)
-                dow: [0, 1, 2, 3, 4, 5, 6], // Monday - Thursday
-                start: '09:00', // a start time (10am in this example)
-                end: '00:00', // an end time (6pm in this example)
-                                }",
+//                "businessHours: {
+//                // days of week. an array of zero-based day of week integers (0=Sunday)
+//                dow: [0, 1, 2, 3, 4, 5, 6], // Monday - Thursday
+//                start: '08:30', // a start time (10am in this example)
+//                end: '00:00', // an end time (6pm in this example)
+//
+//
+//                                }",
+                'businessHours'=> [
+                    'dow' => [0, 1, 2, 3, 4, 5, 6],// sunday - saterday
+                    'start'=> '08:30',// a start time
+                    'end' => '23:59',// an end time
+                    ],
+
                 'allDay'=>'false',
                 'locale'=>'fr'
 

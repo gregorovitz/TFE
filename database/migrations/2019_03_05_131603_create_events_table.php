@@ -21,32 +21,33 @@ class CreateEventsTable extends Migration
         Schema::create('Events', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('numPeopleExp');
-            $table->Json('numPeopleActuCame')->nullable();
+            $table->integer('numMaxPeople');
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('daysofweek')->nullable();
+            $table->enum('status',['request','signature waiting','validate','pay']);
             $table->time('startime');
             $table->time('endtime');
-            $table->unsignedInteger('roomId');
-            $table->unsignedInteger('typeEventsId');
-            $table->unsignedInteger('userId');
-//            $table->unsignedInteger('bookingId');
             $table->string('color')->default('yellow');
+            $table->string('url');
+            $table->string('commentaire')->nullable();
+            $table->string('publicTypes');
+            $table->string('description');
+            $table->string('communication')->nullable();
+            $table->integer('tarif')->nullable();
+            $table->unsignedInteger('roomId');
+            $table->unsignedInteger('userId');
+            $table->unsignedInteger('organisationId');
+
             $table->foreign('roomId')
                 ->references('id')
                 ->on ('rooms');
-            $table->foreign('typeEventsId')
-                ->references('id')
-                ->on('typeevents');
             $table->foreign('userId')
                 ->references('id')
                 ->on ('users');
-//            $table->foreign('bookingId')
-//                ->references('id')
-//                ->on ('bookings');
-
+            $table->foreign('organisationId')
+                ->references('id')
+                ->on ('organisations');
         });
 
     }

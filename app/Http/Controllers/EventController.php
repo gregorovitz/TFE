@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Events;
 use Illuminate\Support\Facades\Auth;
-use App\Booking;
+
 use App\Organisation;
 use App\Notifications\RentalRequestTrésorier;
 class EventController extends Controller
@@ -33,10 +33,8 @@ class EventController extends Controller
         return $dataTable->render('events.view');
     }
     public function show($id){
-        $eventHasBooking = booking::where('eventId', $id)
-            ->count();
         $event=Events::findOrFail($id);
-        return view('events.show', compact('event' ,'eventHasBooking'));
+        return view('events.show', compact('event'));
     }
     public function store(storeEventRequest $request)
     {
@@ -64,19 +62,11 @@ class EventController extends Controller
                 $typepeople=$request['otherTypePeople'];
         }
 
-//        $nameBooking=Auth::user()->name.Auth::user()->firstname.date('d/m/Y-G:i:s').$request['event_name'];
-//        $booking=new Booking;
-//        $booking->name=$nameBooking;
-//        $booking->userId=Auth::user()->id;
-//        $booking->save();
-//        $bookingIds=Booking::where('name','=',$nameBooking)->select('id')->get();
-//        $bookingid=$bookingIds[0]->id;
-        //        echo($nameBooking);die();
+
         $event=new Events;
-//        $event->validate=0;
-//        $event->payement=0;
+        $event->status='request';
         $event->name=$request['event_name'];
-        $event->numPeopleExp=$request['numPeopleexp'];
+        $event->numMaxPeople=$request['numPeopleexp'];
         $event->start_date =$request['start_date'];
         $event->end_date=$request['end_date'];
         $event->startime=$request['start_time'];
@@ -89,13 +79,11 @@ class EventController extends Controller
         $event->organisationId=$request['organisationId'];
         $event->commentaire=$request['comment'];
         $event->save();
-//        $event->booking()->sync($bookingid);
-//        $event->type()->sync($request['typeEventsId']);
 
         \Session::flash('success','Event added successfully');
         $userNotify=User::find($event->userId);
         $userNotify->notify(new RentalRequest($event));
-        $users=DB::select('call get_user_has_Role(\'gestionnaire de salle\')');
+        $users=DB::select('call get_user_has_Role("gestionnaire de salle")');
 
         foreach ($users as $user){
             $managerNotify=User::find($user->id);
@@ -108,7 +96,6 @@ class EventController extends Controller
 
     }
     public function create($date,$hour,$room){
-//        $typesEvents=TypeEvents::pluck('name','id');
         $dataroom=Room::findOrFail($room);
         $organisation=Organisation::pluck('name','id');
         return view('events.create',compact('date','hour','dataroom','organisation'));
@@ -128,23 +115,18 @@ class EventController extends Controller
         $event = Events::find($id);
         if ($event->color == 'yellow') {
             $event->color = 'orange';
-//        }elseif($event->color=='blue') {
-//            $event->color='dark_green';
         }
         $event->updated_at = now();
+        $event->communication=$request['communication'];
+        $event->status='validate';
         $event->save();
-        $bookingid=Booking::where('eventId',$id)
-            ->update(['communication'=>$request['communication'],'validate'=>1]);
 
-
-        $booking=Booking::findOrFail($bookingid);
-
-        $users=DB::select('call get_user_has_Role(\'trésorier\')');
+        $users=DB::select('call get_user_has_Role("trésorier")');
 
         foreach ($users as $user){
             $managerNotify=User::find($user->id);
 
-            $managerNotify->notify(new RentalRequestTrésorier($event,$booking));
+            $managerNotify->notify(new RentalRequestTrésorier($event));
 
         }
         return redirect()->to('/location/' . $event->roomId)
@@ -152,14 +134,10 @@ class EventController extends Controller
     }
     public function payementvalidateEvent($id)
     {
-        Booking::where('eventId',$id)
-            ->update(['payement'=>1]);
 
         $event = Events::find($id);
         $event->color = 'green';
-//        }elseif($event->color=='blue') {
-//            $event->color='dark_green';
-//        }
+        $event->status='pay';
         $event->updated_at = now();
         $event->save();
 

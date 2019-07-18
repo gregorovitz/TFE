@@ -20,10 +20,10 @@ class RentalRequestTrésorier extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event,$booking)
+    public function __construct($event)
     {
         $this->event=$event;
-        $this->booking=$booking;
+
     }
 
     /**
@@ -50,7 +50,7 @@ class RentalRequestTrésorier extends Notification implements ShouldQueue
 
             ->subject('bouvelle reservation validé')
             ->greeting('bonjour')
-            ->line('une nouvelle réservation à été validé avec la communication : '.$this->booking->communication.' et le montant du virement est de : '.$this->booking->total.'.')
+            ->line('une nouvelle réservation à été validé avec la communication : '.$this->event->communication.' et le montant du virement est de : '.$this->event->tarif.'.')
             ->line('une fois le payement reçu veuillé cliquer sur le boutons ci-dessus pour valider le payement ')
             ->action('valider payement', url($url));
 
